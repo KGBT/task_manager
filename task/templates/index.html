@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" enctype="multipart/form-data">
+    {% for field in TaskForm %}
+        {{ field.label }}
+        {{ field }}<br>
+    {% endfor %}
+
+</form>
+<br>
+<form action="">
+    {% for field in UserForm %}
+        {{ field.label }}
+        {{ field }}<br>
+    {% endfor %}
+</form>
+</body>
+</html>

@@ -11,7 +11,7 @@ class Task(models.Model):
     description = models.TextField(max_length=1000, null=True, blank=True)
     date_start = models.DateField()
     date_end = models.DateField()
-    # users = models.ManyToManyField(User, through='UserTask')
+
 
 
 class Status(models.Model):

@@ -26,8 +26,16 @@ class UserTask(models.Model):
 
 
 class Priority(models.Model):
+    LOW = 'LOW'
+    MEDIUM = 'MEDIUM'
+    HIGH = 'HIGH'
+    PRIORITY_CHOICES = [
+        (LOW, 'Низкий'),
+        (MEDIUM, 'Средний'),
+        (HIGH, 'Высокий'),
+    ]
     task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
-    priority = models.CharField(max_length=15)
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default=LOW)
 
 
 class File(models.Model):

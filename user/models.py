@@ -13,6 +13,7 @@ class User(models.Model):
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=1000)
 
+    #Метод для преобразования данных для поля Select
     @staticmethod
     def get_user_choices():
         users = User.objects.values('id').annotate(

@@ -1,0 +1,13 @@
+.exit{
+  color: red;
+  border: 2px;
+  border-color: red;
+}
+
+.btn-border{
+  border-style: solid 2px;
+}
+.card-footer{
+  background-color: white;
+  
+}

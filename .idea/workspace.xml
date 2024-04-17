@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Переделал Priority. Добавил статический метод в User для преобразования в choices.">
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Добавил верстку сайта.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/сайт/asdas.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/сайт/asdas.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +115,8 @@
       <workItem from="1712758378052" duration="7036000" />
       <workItem from="1712842294441" duration="7128000" />
       <workItem from="1713021066332" duration="821000" />
+      <workItem from="1713291450746" duration="95000" />
+      <workItem from="1713370991023" duration="22000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -171,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712850003878</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Добавил верстку сайта.">
+      <option name="closed" value="true" />
+      <created>1713291527961</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713291527961</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +218,7 @@
     <MESSAGE value="Переработал базу данных. Создал Status. Добавил Status в UserTask. Переработал некоторые поля, добавив blank=True." />
     <MESSAGE value="Добавил поле username в User. Создал формы для User и Task." />
     <MESSAGE value="Переделал Priority. Добавил статический метод в User для преобразования в choices." />
-    <option name="LAST_COMMIT_MESSAGE" value="Переделал Priority. Добавил статический метод в User для преобразования в choices." />
+    <MESSAGE value="Добавил верстку сайта." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил верстку сайта." />
   </component>
 </project>

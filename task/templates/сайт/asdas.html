@@ -10,7 +10,7 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-   
+
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -39,21 +39,30 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <li
+              class="nav-item d-flex justify-content-between align-items-center"
+            >
               <a class="nav-link active" aria-current="page" href="#">Задачи</a>
+              <span class="badge bg-primary rounded-pill">14</span>
             </li>
-            <li class="nav-item">
+            <li
+              class="nav-item d-flex justify-content-between align-items-center"
+            >
               <a class="nav-link" href="#">Входящие</a>
+              <span class="badge bg-primary rounded-pill">14</span>
             </li>
-            <li class="nav-item">
+            <li
+              class="nav-item d-flex justify-content-between align-items-center"
+            >
               <a class="nav-link" href="#">Исходящие</a>
+              <span class="badge bg-primary rounded-pill">14</span>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Архив</a>
             </li>
           </ul>
 
-          <div class="btn-group ms-auto dropdown" style="margin-right: 70px;">
+          <div class="btn-group ms-auto dropdown" style="margin-right: 70px">
             <button
               type="button"
               class="btn dropdown-toggle"
@@ -65,7 +74,15 @@
             </button>
             <ul class="dropdown-menu">
               <li>
-                <button class="dropdown-item" type="button">Сотрудники</button>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasRight"
+                  aria-controls="offcanvasRight"
+                >
+                  Сотрудники
+                </button>
               </li>
               <li>
                 <button class="dropdown-item" type="button">Настройки</button>
@@ -79,18 +96,93 @@
       </div>
     </nav>
 
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+          Добавить сотрудника
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+
+        <form class="d-flex pb-5" role="search">
+          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+          <button class="btn btn-outline-success" type="submit">Поиск</button>
+        </form>
+
+        <ul class="list-group">
+          <li class="list-group-item">Элемент</li>
+          <li class="list-group-item">Второй элемент</li>
+          <li class="list-group-item">Третий элемент</li>
+          <li class="list-group-item">Четвертый элемент</li>
+          <li class="list-group-item">И пятый</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="container pt-5 pb-5">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-
         <div class="col">
           <div class="card border-secondary h-100" style="max-width: 18rem">
-            <button type="button" class="btn btn-outline-secondary"  style="padding-top: 50%; padding-bottom: 50%; font-size: 30px;">Добавить задачу</button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              style="padding-top: 50%; padding-bottom: 50%; font-size: 30px"
+            >
+              Добавить задачу
+            </button>
           </div>
         </div>
 
-
-
-
+        <!-- Модальное окно -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Заголовок модального окна
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Закрыть"
+                ></button>
+              </div>
+              <div class="modal-body">...</div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Закрыть
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Сохранить изменения
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="col">
           <div class="card border-primary h-100" style="max-width: 18rem">
@@ -107,7 +199,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-primary">Завершить</a>
+              <a href="#" class="btn btn-outline-primary">Завершить</a>
             </div>
           </div>
         </div>
@@ -127,7 +219,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-secondary">Завершить</a>
+              <a href="#" class="btn btn-outline-secondary">Завершить</a>
             </div>
           </div>
         </div>
@@ -147,7 +239,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-success">Завершить</a>
+              <a href="#" class="btn btn-outline-success">Завершить</a>
             </div>
           </div>
         </div>
@@ -167,7 +259,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-danger">Завершить</a>
+              <a href="#" class="btn btn-outline-danger">Завершить</a>
             </div>
           </div>
         </div>
@@ -188,7 +280,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-warning">Завершить</a>
+              <a href="#" class="btn btn-outline-warning">Завершить</a>
             </div>
           </div>
         </div>
@@ -209,7 +301,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-info">Завершить</a>
+              <a href="#" class="btn btn-outline-info">Завершить</a>
             </div>
           </div>
         </div>
@@ -229,7 +321,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-light">Завершить</a>
+              <a href="#" class="btn btn-outline-light">Завершить</a>
             </div>
           </div>
         </div>
@@ -249,7 +341,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-dark">Завершить</a>
+              <a href="#" class="btn btn-outline-dark">Завершить</a>
             </div>
           </div>
         </div>
@@ -269,24 +361,20 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn border border-dark">Завершить</a>
+              <a href="#" class="btn btn-outline-dark">Завершить</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-
-
-   
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-          
-          <span class="text-muted ms-4">© 2024 Company, Inc</span>
-        </div>
-      </footer>
-    
-
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+    >
+      <div class="col-md-4 d-flex align-items-center">
+        <span class="text-muted ms-4">© 2024 Company, Inc</span>
+      </div>
+    </footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

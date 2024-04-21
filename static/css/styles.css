@@ -5,9 +5,9 @@
 }
 
 .btn-border{
-  border-style: solid 2px;
+  border-style: solid;
+  border: 2px;
 }
 .card-footer{
   background-color: white;
-  
 }

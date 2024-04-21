@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %} Задачи {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+</head>
+<body>
+
+{% block base %}{% endblock base %}
+
+{% bootstrap_javascript %}
+</body>
+</html>

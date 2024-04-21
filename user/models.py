@@ -29,9 +29,12 @@ class User(models.Model):
 
     @staticmethod
     def find_by_username(username):
-        user=User.objects.filter(username=username)
-        print(user)
+        user = User.objects.filter(username=username)[0]
         return user
+
+    # @staticmethod
+    # def set_employees(user, employee):
+    #     user.employee_set.add(employee)
 
 
 class Employee(models.Model):
@@ -45,16 +48,25 @@ class Employee(models.Model):
         return 'Сотрудник: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
 
     @staticmethod
-    def create_and_save(user: User) -> None:
+    def create_and_save(user: User):  # как сделать Employee
         emp = Employee(name=user.name, surname=user.surname, username=user.username, email=user.email)
         emp.save()
-        # return emp
+        return emp
 
     @staticmethod
     def exists(username: str) -> bool:
-        return User.objects.filter(username=username).exists()
+        return Employee.objects.filter(username=username).exists()
 
     @staticmethod
     def get_list_employee(username: str) -> list:
         return Employee.objects.filter(user__username=User.objects.get(username=username).username)
+
+    @staticmethod
+    def find_by_username(username):
+        emp = Employee.objects.filter(username=username)[0]
+        return emp
+
+    @staticmethod
+    def set_user(employee, user):
+        employee.user_set.add(user)
 

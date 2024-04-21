@@ -36,20 +36,17 @@ from user.models import User, Employee
 def index(request):
     if request.POST:
         username = request.POST['username']
-        print(username)
         user = User.find_by_username(username)
-        print(user)
         if user:
             if not Employee.exists(username):
-                Employee.create_and_save(user)
-                # context['is_add'] = 'ADDED'
-                messages.add_message(request, messages.SUCCESS, 'Сотрудник добавлен!')
+                emp = Employee.create_and_save(user)
             else:
-                messages.add_message(request, messages.INFO, 'Сотрудник уже добавлен!')
-                # context['is_add'] = 'EXIST'
+                emp = Employee.find_by_username(username)
+            user_temp = User.find_by_username('nikitin')
+            Employee.set_user(emp, user_temp)
+            messages.add_message(request, messages.SUCCESS, 'Сотрудник добавлен!')
         else:
-            # context['is_add'] = 'NOTADDED'
             messages.add_message(request, messages.ERROR, 'Пользователь с таким именем не найден!')
         return redirect(request.META.get('HTTP_REFERER', '/'))
-    context = {'employees': Employee.get_list_employee('Kukumber')}
+    context = {'employees': Employee.get_list_employee('nikitin')}
     return render(request, 'header.html', context)

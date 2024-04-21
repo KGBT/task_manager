@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Добавил на сайт модальное окно, боковое окно и устранил мелкие косячки.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" afterDir="false" />
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Доработал боковую панель, разделил на шаблоны верстку.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0002_alter_priority_priority.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/add.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/asdas.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/сайт/asdas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/navbar_elements.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +130,7 @@
       <workItem from="1713291450746" duration="95000" />
       <workItem from="1713370991023" duration="104000" />
       <workItem from="1713615884561" duration="970000" />
-      <workItem from="1713674848311" duration="26723000" />
+      <workItem from="1713674848311" duration="30946000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -217,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713371075627</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Доработал боковую панель, разделил на шаблоны верстку.">
+      <option name="closed" value="true" />
+      <created>1713707066946</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713707066946</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +250,7 @@
     <MESSAGE value="Переделал Priority. Добавил статический метод в User для преобразования в choices." />
     <MESSAGE value="Добавил верстку сайта." />
     <MESSAGE value="Добавил на сайт модальное окно, боковое окно и устранил мелкие косячки." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил на сайт модальное окно, боковое окно и устранил мелкие косячки." />
+    <MESSAGE value="Доработал боковую панель, разделил на шаблоны верстку." />
+    <option name="LAST_COMMIT_MESSAGE" value="Доработал боковую панель, разделил на шаблоны верстку." />
   </component>
 </project>

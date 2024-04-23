@@ -3,6 +3,7 @@ from django.db.models import F
 from django.db.models.functions import Concat
 from django.forms import CharField
 from django.db.models import CharField, Value
+import typing
 
 
 # Create your models here.
@@ -28,45 +29,63 @@ class User(models.Model):
         return cleaned_users
 
     @staticmethod
-    def find_by_username(username):
-        user = User.objects.filter(username=username)[0]
-        return user
+    def find_by_username(username: str):
+        user = User.objects.filter(username=username)
+        users = User.objects.all()
+        print(f'from models {user}')
+        print(f'from models all {users}')
+        if user:
+            return user[0]
+        return None
 
     # @staticmethod
     # def set_employees(user, employee):
     #     user.employee_set.add(employee)
 
 
-class Employee(models.Model):
-    user = models.ManyToManyField(User, related_name='employee', blank=True)
-    name = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30)
-    username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(max_length=255, unique=True)
-
-    def __str__(self):
-        return 'Сотрудник: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    employees = models.ManyToManyField(User, related_name='employees', blank=True)
 
     @staticmethod
-    def create_and_save(user: User):  # как сделать Employee
-        emp = Employee(name=user.name, surname=user.surname, username=user.username, email=user.email)
-        emp.save()
-        return emp
+    def get_or_create(user: User):
+        return UserProfile.objects.get_or_create(user=user)[0]
 
     @staticmethod
-    def exists(username: str) -> bool:
-        return Employee.objects.filter(username=username).exists()
+    def add_employee(user_profile, user: User) -> None:
+       user_profile.employees.add(user)
 
-    @staticmethod
-    def get_list_employee(username: str) -> list:
-        return Employee.objects.filter(user__username=User.objects.get(username=username).username)
 
-    @staticmethod
-    def find_by_username(username):
-        emp = Employee.objects.filter(username=username)[0]
-        return emp
-
-    @staticmethod
-    def set_user(employee, user):
-        employee.user_set.add(user)
-
+# class Employee(models.Model):
+#     user = models.ManyToManyField(User, related_name='employee', blank=True)
+#     name = models.CharField(max_length=30)
+#     surname = models.CharField(max_length=30)
+#     username = models.CharField(max_length=50, unique=True)
+#     email = models.EmailField(max_length=255, unique=True)
+#
+#     def __str__(self):
+#         return 'Сотрудник: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
+#
+#     @staticmethod
+#     def create_and_save(user: User):  # как сделать Employee
+#         emp = Employee(name=user.name, surname=user.surname, username=user.username, email=user.email)
+#         emp.save()
+#         return emp
+#
+#     @staticmethod
+#     def exists(username: str) -> bool:
+#         return Employee.objects.filter(username=username).exists()
+#
+#     @staticmethod
+#     def get_list_employee(username: str) -> list:
+#         return Employee.objects.filter(user__username=User.objects.get(username=username).username)
+#
+#     @staticmethod
+#     def find_by_username(username):
+#         emp = Employee.objects.filter(username=username)[0]
+#         return emp
+#
+#     @staticmethod
+#     def set_user(employee, user):
+#         employee.user_set.add(user)
+#

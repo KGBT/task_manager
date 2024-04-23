@@ -103,22 +103,22 @@
         </div>
         <div class="offcanvas-body">
 
-            <form class="d-flex pb-5" action="/" method="post" id="employeesAdd">
+            <form class="d-flex pb-3"  method="post" id="employeeAdd">
                 {% csrf_token %}
                 <input class="form-control me-2" placeholder="Имя пользователя" aria-label="Добавить" name="username">
                 <button class="btn btn-outline-success" type="submit">Добавить</button>
             </form>
 
 
-            <ul class="list-group">
+            <ul class="list-group" id="list-employees">
                 <li class="list-group-item">Список сотрудников</li>
-            
+
                 {% for emp in employees %}
                     <li class="list-group-item">{{ employees.0.name }} {{ employees.0.surname }}</li>
-                    {% empty %}
-                     
+                {% empty %}
+
                 {% endfor %}
-                
+
             </ul>
         </div>
     </div>
@@ -149,13 +149,6 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-
-
-
-
-
-
-
 
 
 

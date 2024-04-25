@@ -14,6 +14,14 @@ class User(models.Model):
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=1000)
 
+    def __dict__(self):
+        return {
+            'name': self.name,
+            'surname': self.surname,
+            'username': self.username,
+            'email': self.email,
+        }
+
     def __str__(self):
         return 'Пользователь: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
 
@@ -29,11 +37,11 @@ class User(models.Model):
         return cleaned_users
 
     @staticmethod
-    def find_by_username(username: str):
+    def find_by_username(username: str) -> "User" or None:
         user = User.objects.filter(username=username)
         users = User.objects.all()
-        print(f'from models {user}')
-        print(f'from models all {users}')
+        # print(f'from models {user}')
+        # print(f'from models all {users}')
         if user:
             return user[0]
         return None
@@ -47,14 +55,28 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     employees = models.ManyToManyField(User, related_name='employees', blank=True)
 
+    def __str__(self):
+        return str(f'Пользователь: {self.user}\n работник: {self.employees}')
+
+    # def __dict__(self):
+    #     return {'user': self.user, 'employees': self.employees}
+
     @staticmethod
-    def get_or_create(user: User):
+    def get_or_create(user: User) -> 'UserProfile':
+        print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
         return UserProfile.objects.get_or_create(user=user)[0]
 
     @staticmethod
     def add_employee(user_profile, user: User) -> None:
-       user_profile.employees.add(user)
+        user_profile.employees.add(user)
 
+    @staticmethod
+    def find_employees_by_user(user: User) -> "UserProfile" or None:
+        user_profile = UserProfile.objects.filter(user=user)
+        print(f'userprofil поиск {user_profile}')
+        if user_profile:
+            return user_profile
+        return None
 
 # class Employee(models.Model):
 #     user = models.ManyToManyField(User, related_name='employee', blank=True)

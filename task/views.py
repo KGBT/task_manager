@@ -2,11 +2,12 @@ import json
 import random
 
 from django.core.exceptions import ValidationError
+from django.db.models.functions import Concat
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from django.contrib import messages
-
+from django.db.models import CharField, Value
 # from task.forms import TaskForm, FileFieldForm, FileForm
 from user.forms import UserForm
 from user.models import User, UserProfile
@@ -62,21 +63,30 @@ def index(request):
 def add_employee(request):
     # чтобы использовать объекты их необходимо сериализовать
     username = request.POST['username']
-    jsons = request.POST
-    print(jsons)
+
     user_employee = User.find_by_username(username)
-    print(f'Имя пользователяяяяяяяяя {username}')
-    print(user_employee)
-    print(f'Реквест{request}')
+
     context: dict = {}
+    user_login = User.find_by_username(
+        'nikitin')  # после реализации регистрации сделать получение пользователя через логин
     if user_employee:
-        user_login = User.find_by_username(
-            'nikitin')  # после реализации регистрации сделать получение пользователя через логин
+
+        print(f'работник из вью {user_login.userprofile.employees.all()}',
+              )  # доступ к работникам
+        print(type(user_login.userprofile.employees.all()))
         user_profile_employee = UserProfile.get_or_create(user_employee)
         user_profile_login = UserProfile.get_or_create(user_login)
         UserProfile.add_employee(user_profile_employee, user_login)
         UserProfile.add_employee(user_profile_login, user_employee)
+
+        # user_profile_employee = UserProfile.get_or_create(user_login)
+        # UserProfile.add_employee(user_profile_employee, user_login)
         context['success'] = True
     else:
         context['success'] = False
+    name_emp = user_login.userprofile.employees.filter(username='nikitin').values().annotate(
+            full_name=Concat('name', Value(' '), 'surname', output_field=CharField()))
+    full_name = name_emp[0]['full_name']
+    print(full_name, 'asdsasdasdasdas')
+    context['full_name'] = full_name
     return JsonResponse(context)

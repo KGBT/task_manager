@@ -7,9 +7,11 @@ $(document).ready(function () {
             data: $(this).serialize(), // получаяем данные формы
             type: 'POST',
             url: "add-employee/",
+            datatype:'json',
             // если успешно, то
             success: function (response) {
                 event.target.reset();
+
                 if (response.success == true) {
                     console.log(response);
                     const employeeAdd = document.getElementById('employeeAdd');
@@ -21,11 +23,11 @@ $(document).ready(function () {
                     employeeAdd.insertAdjacentHTML('afterend', '<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">\n' +
                         '                    Пользователь добавлен!\n' +
                         '                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '                </div>')
+                        '                </div>');
+                    const itemEmp = document.getElementById('item-employee');
+                    itemEmp.insertAdjacentHTML('afterend',`<li class="list-group-item"> ${response.full_name} </li>`); //временная затычка
 
-                    const listEmp = document.getElementById('list-employees');
 
-                    $('#list-employees').insertAdjacentHTML().insertAdjacentHTML('afterbegin',`<li class="list-group-item">${response.name} ${response.surname}</li>`); //временная затычка
 
 
                 } else {

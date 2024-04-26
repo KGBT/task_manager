@@ -14,14 +14,6 @@ class User(models.Model):
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=1000)
 
-    def __dict__(self):
-        return {
-            'name': self.name,
-            'surname': self.surname,
-            'username': self.username,
-            'email': self.email,
-        }
-
     def __str__(self):
         return 'Пользователь: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
 
@@ -39,16 +31,18 @@ class User(models.Model):
     @staticmethod
     def find_by_username(username: str) -> "User" or None:
         user = User.objects.filter(username=username)
-        users = User.objects.all()
-        # print(f'from models {user}')
-        # print(f'from models all {users}')
         if user:
             return user[0]
         return None
 
-    # @staticmethod
-    # def set_employees(user, employee):
-    #     user.employee_set.add(employee)
+    def exists_employees_by_username(self, username: str) -> bool:
+        return self.userprofile.employees.filter(username=username).exists()
+
+    def get_employees(self) -> "User" or None:
+        employees = self.userprofile.employees.all()
+        if employees:
+            return employees
+        return None
 
 
 class UserProfile(models.Model):
@@ -58,17 +52,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return str(f'Пользователь: {self.user}\n работник: {self.employees}')
 
-    # def __dict__(self):
-    #     return {'user': self.user, 'employees': self.employees}
-
     @staticmethod
     def get_or_create(user: User) -> 'UserProfile':
         print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
         return UserProfile.objects.get_or_create(user=user)[0]
 
-    @staticmethod
-    def add_employee(user_profile, user: User) -> None:
-        user_profile.employees.add(user)
+    def add_employee(self, user: User) -> None:
+        self.employees.add(user)
 
     @staticmethod
     def find_employees_by_user(user: User) -> "UserProfile" or None:
@@ -111,3 +101,43 @@ class UserProfile(models.Model):
 #     def set_user(employee, user):
 #         employee.user_set.add(user)
 #
+
+
+# Для сериализации объектов Django без пароля, вы можете использовать встроенные инструменты Django или сторонние библиотеки. Вот несколько способов сделать это:
+
+# 1. **Использование встроенных инструментов Django:**
+#
+#     * Создайте сериализатор для вашей модели, используя встроенный класс `serializers.Serializer` или `serializers.ModelSerializer`.
+#     * В сериализаторе определите поля, которые вы хотите сериализовать, и исключите поля, содержащие конфиденциальную информацию, такую как пароль.
+#     * Используйте метод `serializers.serialize` для сериализации объекта модели в нужный формат (например, JSON).
+#
+# 2. **Использование сторонних библиотек:**
+#
+#     * Существует множество сторонних библиотек, которые могут помочь вам сериализовать объекты Django без пароля. Например, вы можете использовать библиотеку `django-rest-framework`, которая предоставляет мощные инструменты для создания RESTful API.
+#
+# Вот пример использования встроенных инструментов Django для сериализации объекта модели без пароля:
+#
+# ```python
+# from django.core import serializers
+# from myapp.models import User
+#
+# # Получаем объект модели
+# user = User.objects.get(id=1)
+#
+# # Создаем сериализатор
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'email')
+#
+#     # Исключаем поле пароля
+#     password = serializers.CharField(write_only=True)
+#
+# # Сериализуем объект в JSON
+# serialized_user = UserSerializer(user).data
+#
+# # Выводим результат
+# print(serialized_user)
+# ```
+#
+# Этот код сериализует объект модели `User` без поля пароля и выводит результат на экран. Вы можете сохранить результат в файл или отправить его через API.

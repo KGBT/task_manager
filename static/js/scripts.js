@@ -7,41 +7,29 @@ $(document).ready(function () {
             data: $(this).serialize(), // получаяем данные формы
             type: 'POST',
             url: "add-employee/",
-            datatype:'json',
+            datatype: 'json',
             // если успешно, то
             success: function (response) {
                 event.target.reset();
-
-                if (response.success == true) {
-                    console.log(response);
-                    const employeeAdd = document.getElementById('employeeAdd');
-                    const alert = document.getElementById('alert-error-emp');
-                    if (alert) {
-                        alert.remove();
-                    }
-
-                    employeeAdd.insertAdjacentHTML('afterend', '<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">\n' +
-                        '                    Пользователь добавлен!\n' +
-                        '                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '                </div>');
+                const employeeAdd = document.getElementById('employeeAdd');
+                const alert = document.getElementById('alert-error-emp');
+                if (alert) {
+                    alert.remove();
+                }
+                if (response.is_add) {
                     const itemEmp = document.getElementById('item-employee');
-                    itemEmp.insertAdjacentHTML('afterend',`<li class="list-group-item"> ${response.full_name} </li>`); //временная затычка
+                    employeeAdd.insertAdjacentHTML('afterend', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">${response.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+                    itemEmp.insertAdjacentHTML('afterend', `<li class="list-group-item"> ${response.full_name} </li>`);
+
+                } else if (response.is_exist) {
+                    employeeAdd.insertAdjacentHTML('afterend', `<div class="alert alert-info alert-dismissible fade show" role="alert" id="alert-error-emp">${response.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
 
 
-
-
-                } else {
-                    // $('#id_username').removeClass('is-invalid').addClass('is-valid');
-                    // $('#usernameError').remove();
-                    const employeeAdd = document.getElementById('employeeAdd');
-                    const alert = document.getElementById('alert-error-emp');
-                    if (alert) {
-                        alert.remove();
-                    }
-                    employeeAdd.insertAdjacentHTML('afterend', '<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-error-emp">\n' +
-                        '                    Пользователь с таким именем не найден!\n' +
-                        '                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '                </div>')
+                } else if (response.is_not) {
+                    employeeAdd.insertAdjacentHTML('afterend', `<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-error-emp">${response.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`)
 
                 }
             },

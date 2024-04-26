@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Сделал боковую панель. Переделал модель. Переработал верстку. Можно убрать лишнее. точно этот коммит!!!!!">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" afterDir="false" />
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Вроде нашел способ обращения к элементам employees.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +139,9 @@
       <workItem from="1713615884561" duration="970000" />
       <workItem from="1713674848311" duration="30946000" />
       <workItem from="1713904108540" duration="121000" />
-      <workItem from="1714062431582" duration="5713000" />
+      <workItem from="1714062431582" duration="5979000" />
+      <workItem from="1714068864801" duration="846000" />
+      <workItem from="1714141741906" duration="5539000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -228,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713904212144</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Вроде нашел способ обращения к элементам employees.">
+      <option name="closed" value="true" />
+      <created>1714068772521</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1714068772521</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +279,7 @@
     <MESSAGE value="Добавил на сайт модальное окно, боковое окно и устранил мелкие косячки." />
     <MESSAGE value="Доработал боковую панель, разделил на шаблоны верстку." />
     <MESSAGE value="Сделал боковую панель. Переделал модель. Переработал верстку. Можно убрать лишнее. точно этот коммит!!!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал боковую панель. Переделал модель. Переработал верстку. Можно убрать лишнее. точно этот коммит!!!!!" />
+    <MESSAGE value="Вроде нашел способ обращения к элементам employees." />
+    <option name="LAST_COMMIT_MESSAGE" value="Вроде нашел способ обращения к элементам employees." />
   </component>
 </project>

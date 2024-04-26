@@ -114,7 +114,7 @@
                 <li class="list-group-item" id="item-employee">Список сотрудников</li>
 
                 {% for emp in employees %}
-                    <li class="list-group-item">{{ employees.0.name }} {{ employees.0.surname }}</li>
+                    <li class="list-group-item">{{ emp.name }} {{ emp.surname }}</li>
                 {% empty %}
 
                 {% endfor %}
@@ -126,31 +126,7 @@
 
 
 
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endif %}
-            {% if message.tags == 'info' %}
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endif %}
-            {% if message.tags == 'error' %}
-
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
-
+    <h1 id="user"></h1>
 
 
 {% endblock header %}

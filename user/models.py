@@ -17,16 +17,14 @@ class User(models.Model):
     def __str__(self):
         return 'Пользователь: ' + self.name + ' ' + self.surname + ' ' + self.username + ' ' + self.email
 
-    # Метод для преобразования данных для поля Select
-    @staticmethod
-    def get_user_choices():
-        users = User.objects.values('id').annotate(
+    # Метод для преобразования данных для формы поля ModelMultipleChoiceField
+    def get_employees_for_choice(self) -> typing.List[tuple]:
+        employees = self.userprofile.employees.values('id').annotate(
             full_name=Concat('name', Value(' '), 'surname', output_field=CharField()))
-        cleaned_users = []
-        for i in range(len(users)):
-            cleaned_users.append((users[i].get('id'), users[i].get('full_name')))
-        print(cleaned_users)
-        return cleaned_users
+        employees_list = []
+        for emp in employees:
+            employees_list.append((emp.get('id'), emp.get('full_name')))
+        return employees_list
 
     @staticmethod
     def find_by_username(username: str) -> "User" or None:
@@ -63,7 +61,6 @@ class UserProfile(models.Model):
     @staticmethod
     def find_employees_by_user(user: User) -> "UserProfile" or None:
         user_profile = UserProfile.objects.filter(user=user)
-        print(f'userprofil поиск {user_profile}')
         if user_profile:
             return user_profile
         return None

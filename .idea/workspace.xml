@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Вроде нашел способ обращения к элементам employees.">
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Закончил с боковой панелью.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_manager/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="Python Script" />
         <option value="HTML File" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -141,7 +144,8 @@
       <workItem from="1713904108540" duration="121000" />
       <workItem from="1714062431582" duration="5979000" />
       <workItem from="1714068864801" duration="846000" />
-      <workItem from="1714141741906" duration="5539000" />
+      <workItem from="1714141741906" duration="5640000" />
+      <workItem from="1714296276563" duration="19751000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -239,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714068772521</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Закончил с боковой панелью.">
+      <option name="closed" value="true" />
+      <created>1714150083162</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1714150083162</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +292,7 @@
     <MESSAGE value="Доработал боковую панель, разделил на шаблоны верстку." />
     <MESSAGE value="Сделал боковую панель. Переделал модель. Переработал верстку. Можно убрать лишнее. точно этот коммит!!!!!" />
     <MESSAGE value="Вроде нашел способ обращения к элементам employees." />
-    <option name="LAST_COMMIT_MESSAGE" value="Вроде нашел способ обращения к элементам employees." />
+    <MESSAGE value="Закончил с боковой панелью." />
+    <option name="LAST_COMMIT_MESSAGE" value="Закончил с боковой панелью." />
   </component>
 </project>

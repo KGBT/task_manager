@@ -1,22 +1,48 @@
-# from django import forms
-#
-# from task.models import Priority
-# from user.models import User
-#
-#
-# class TaskForm(forms.Form):
+from django import forms
+from django.forms import ModelForm, Form
+from task.models import Priority, Task, File
+
+
+class TaskForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = ['name', 'date_end', 'description']
+
+        widgets={
+            'date_end': forms.widgets.DateInput(attrs={'type': 'date','class':'datepicker form-control'}),
+
+        }
+
+
+    def __init__(self, user_login, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['executors'] = forms.CharField(widget=forms.Select(choices=user_login.get_employees_for_choice()))
+
+
 #     name = forms.CharField(label='Name', max_length=50)
 #     description = forms.CharField(widget=forms.Textarea, max_length=1000)
 #     deadline = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}))
 #     priority = forms.ChoiceField(choices=Priority.PRIORITY_CHOICES)
 #     executors = forms.CharField(widget=forms.Select(choices=User.get_user_choices()))
-#
-# #Это не работает
+
+
+class PriorityForm(ModelForm):
+    class Meta:
+        model = Priority
+        fields = ['priority']
+
+
+class FileForm(ModelForm):
+    class Meta:
+        model = File
+        fields = ['path']
+
+# Это не работает
 # class FileForm(forms.Form):
 #     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'allow_multiple_selected': True}))
-#
-#
-# #Для загрузки нескольких файлов создаем несколько классов
+
+
+# Для загрузки нескольких файлов создаем несколько классов
 # class MultipleFileInput(forms.ClearableFileInput):
 #     allow_multiple_selected = True
 #

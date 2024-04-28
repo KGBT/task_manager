@@ -1,6 +1,5 @@
-{% extends 'base.html' %}
+
 {% load static %}
-{% block header %}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -116,17 +115,9 @@
                 {% for emp in employees %}
                     <li class="list-group-item">{{ emp.name }} {{ emp.surname }}</li>
                 {% empty %}
-
                 {% endfor %}
 
             </ul>
         </div>
     </div>
 
-
-
-
-    <h1 id="user"></h1>
-
-
-{% endblock header %}

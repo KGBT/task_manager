@@ -10,7 +10,7 @@ class Task(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000, null=True, blank=True)
     date_start = models.DateField()
-    date_end = models.DateField()
+    date_end = models.DateField(blank=True, null=True)
 
 
 

@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="container pt-5 pb-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card border-secondary h-100" style="max-width: 18rem">
+                    <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            style="padding-top: 50%; padding-bottom: 50%; font-size: 30px"
+                    >
+                        Добавить задачу
+                    </button>
+                </div>
+            </div>
+
+            <!-- Модальное окно -->
+            <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                Добавить задачу
+                            </h1>
+
+                            <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Закрыть"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+
+
+
+                            <form >
+      <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Наименование задачи">
+      <label for="floatingInput">Наименование задачи</label>
+    </div>
+
+    <div class="row g-2 mb-3">
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid">
+            <option selected>Откройте это меню выбора</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+          </select>
+          <label for="floatingSelect">Работает с элементом выбора</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid">
+            <option selected>Откройте это меню выбора</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+          </select>
+          <label for="floatingSelect">Работает с элементом выбора</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating mb-3">
+      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+      <label for="floatingTextarea2">Комментарии</label>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupFile01">Загрузка</label>
+      <input type="file" class="form-control" id="inputGroupFile01">
+    </div>
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+                            {% for field in taskForm %}
+                                {{ field }}
+                                <br/>
+                            {% endfor %}
+                            {% for field in priorityForm %}
+                                {{ field }}
+                                <br/>
+                            {% endfor %}
+                            {% for field in fileForm %}
+                                {{ field }}
+                                <br/>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                            >
+                                Закрыть
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                Отправить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-primary h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body text-primary">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-primary">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-secondary h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body text-secondary">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для поasdasdстроения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-secondary">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-success h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body text-success">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста ddddдля построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-success">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-danger h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body text-danger">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.sdasdadsad
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-danger">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-warning h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки. Lorem ipsum, dolor sit amet consectetur adipisicing
+                            elit. Error, corporis.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-warning">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-info h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки. Lorem ipsum dolor, sit amet consectetur adipisicing
+                            elit. Cupiditate nam aliquam officia quae vel cum?
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-info">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-light h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки. Lorem ipsum dolor sit amet.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-light">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-dark h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-dark">Завершить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-dark h-100" style="max-width: 18rem">
+                    <div class="card-header">
+                        <h5>Наименование задачи</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Инициатор:</h6>
+                        <h6 class="card-subtitle mb-2">Дедлайн: 01/02/2023-03/03/2023</h6>
+                        <p class="card-text">
+                            Несколько быстрых примеров текста для построения на основе
+                            Заголовок карточки и составления основной части содержимого
+                            карточки.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-dark">Завершить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+

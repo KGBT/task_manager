@@ -1,0 +1,92 @@
+<div class="col">
+    <div class="card border-secondary h-100" style="max-width: 18rem">
+        <button
+                type="button"
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                style="padding-top: 50%; padding-bottom: 50%; font-size: 30px"
+        >
+            Добавить задачу
+        </button>
+    </div>
+</div>
+
+<!-- Модальное окно -->
+<div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="modalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalLabel">
+                    Добавить задачу
+                </h1>
+
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Закрыть"
+                ></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" id="addTask">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{ taskForm.name }}
+                        <label for="{{ taskForm.name.id_for_label }}">{{ taskForm.name.label }}</label>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md">
+                            <label for="{{ taskForm.executors.id_for_label }}"
+                                   class="mb-2">{{ taskForm.executors.label }}</label>
+                            {{ taskForm.executors }}
+
+                        </div>
+                        <div class="col-md">
+                            <label for="{{ priorityForm.priority.id_for_label }}"
+                                   class="mb-2">{{ priorityForm.priority.label }}</label>
+                            {{ priorityForm.priority }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ taskForm.date_end.id_for_label }}"
+                               class="mb-2">{{ taskForm.date_end.label }}</label>
+                        {{ taskForm.date_end }}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ taskForm.description }}
+                        <label for="{{ taskForm.description.id_for_label }}">{{ taskForm.description.label }}</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text"
+                               for="{{ fileForm.path.id_for_label }}">{{ fileForm.path.label }}</label>
+                        {{ fileForm.path }}
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                >
+                    Закрыть
+                </button>
+                <button type="submit" form="addTask" class="btn btn-primary">
+                    Отправить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

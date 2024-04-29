@@ -6,7 +6,7 @@ $(document).ready(function () {
         $.ajax({
             data: $(this).serialize(), // получаяем данные формы
             type: 'POST',
-            url: "add-employee/",
+            url: "add_employee/",
             datatype: 'json',
             // если успешно, то
             success: function (response) {
@@ -32,6 +32,111 @@ $(document).ready(function () {
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`)
 
                 }
+            },
+            // если ошибка, то
+            error: function (response) {
+                // предупредим об ошибке
+                console.log(response.responseJSON.errors)
+            }
+        });
+        return false;
+    });
+})
+
+
+$(document).ready(function () {
+
+    // отслеживаем событие отправки формы
+    $('#id_name').keyup(function () {
+
+        // создаем AJAX-вызов
+        $.ajax({
+            datatype: 'json',
+            data: $(this).serialize(), // получаяем данные формы
+            url: "validate_task_name/",
+            // если успешно, то
+            success: function (response) {
+                console.log('В ajax');
+
+                if (response.is_empty == true || response.is_max_length == true) {
+                    const alert = document.getElementById('nameError');
+                    if (!alert) {
+                        $('#id_name').addClass('is-invalid');
+                        $('#id_name').after('<div class="invalid-feedback d-block" id="nameError">Это обятательное поле! Не более 50 символов.</div>');
+                    }
+                } else {
+
+                    $('#id_name').removeClass('is-invalid');
+                    $('#nameError').remove();
+                }
+
+            },
+            // если ошибка, то
+            error: function (response) {
+                // предупредим об ошибке
+                console.log(response.responseJSON.errors)
+            }
+        });
+        return false;
+    });
+})
+
+
+$(document).ready(function () {
+
+    // отслеживаем событие отправки формы
+    $('#id_description').keyup(function () {
+
+        // создаем AJAX-вызов
+        $.ajax({
+            datatype: 'json',
+            data: $(this).serialize(), // получаяем данные формы
+            url: "validate_description/",
+            // если успешно, то
+            success: function (response) {
+                console.log('В ajax');
+                if (response.is_max_length == true) {
+                    const alert = document.getElementById('nameError');
+                    if (!alert) {
+                        $('#id_description').addClass('is-invalid');
+                        $('#id_description').after('<div class="invalid-feedback d-block" id="nameError">Не более 1000 символов.</div>');
+                    }
+                } else {
+
+                    $('#id_description').removeClass('is-invalid');
+                    $('#nameError').remove();
+                }
+
+            },
+            // если ошибка, то
+            error: function (response) {
+                // предупредим об ошибке
+                console.log(response.responseJSON.errors)
+            }
+        });
+        return false;
+    });
+})
+
+
+$(document).ready(function () {
+
+    // отслеживаем событие отправки формы
+    $('#addTask').submit(function (event) {
+        event.preventDefault();
+        // создаем AJAX-вызов
+        $.ajax({
+            data: $(this).serialize(), // получаяем данные формы
+            type: 'POST',
+            url: "add_task/",
+            // если успешно, то
+            success: function (response) {
+                console.log('В ajax post');
+                event.target.reset();
+                const addTask = document.getElementById('addTask');
+                addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+
             },
             // если ошибка, то
             error: function (response) {

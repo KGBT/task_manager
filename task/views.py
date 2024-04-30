@@ -1,5 +1,6 @@
 import json
 import random
+from datetime import date
 
 from django.core import serializers
 from django.core.exceptions import ValidationError
@@ -11,12 +12,14 @@ from django.contrib import messages
 from django.db.models import CharField, Value
 
 from task.forms import TaskForm, PriorityForm, FileForm
+from task.models import Task, Priority, Status, File, UserTask
 # from task.forms import TaskForm, FileFieldForm, FileForm
 from user.forms import UserForm
 from user.models import User, UserProfile
 
 
 # Create your views here.
+
 
 def tasks(request):
     user_login = User.find_by_username('nikitin')
@@ -28,10 +31,16 @@ def tasks(request):
         user_alex.save()
 
         # 'taskForm': TaskForm( user_login.get_employees_for_choice()),
-    user_login.get_employees_for_choice()
+    # user_login.get_employees_for_choice()
+
     context = {'taskForm': TaskForm(user_login=user_login), 'priorityForm': PriorityForm(),
                'fileForm': FileForm(),
                'employees': user_login.get_employees()}
+
+    # context = {
+    #
+    #           }
+
     return render(request, 'tasks.html', context)
 
 
@@ -51,6 +60,18 @@ def validate_description(request):
     if len(description) > 1000:
         context['is_max_length'] = True
     return JsonResponse(context)
+
+
+def scripts(request):
+    user = User.find_by_username(username='nikitin')
+    if not user:
+        user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
+        user_ivan.save()
+        user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
+        user_alex.save()
+    user_profile_employee = UserProfile.get_or_create(user)
+    user_profile_employee.add_employee(user)
+    return HttpResponse('ok')
 
 
 def add_employee(request):
@@ -81,8 +102,33 @@ def add_employee(request):
 
 def add_task(request):
     print(request.POST)
-    user_login = User.find_by_username('nikitin')
-    return HttpResponse()
+    print(request.FILES)
+    if request.method == 'POST':
+        user_login = User.find_by_username('nikitin')
+        user_employee = User.find_by_id(request.POST['executors'])
+
+        task = Task(name=request.POST['name'], description=request.POST['description'], date_start=date.today())
+
+        priority = Priority.get_or_create(request.POST['priority'])
+        task.add_priority(priority)
+
+        date_end = request.POST['date_end']
+        if date_end:
+            task.add_date_end(date_end)
+
+        task.save()
+
+        if request.FILES:
+            task_file = File.create_and_save_file(request.FILES['file'])
+            task_file.add_task(task)
+
+        status_for_login = Status.create(Status.OUTBOX)
+        status_for_employee = Status.create(Status.INBOX)
+
+        UserTask.create_user_task(user_login, task, status_for_login)
+        UserTask.create_user_task(user_employee, task, status_for_employee)
+
+    return JsonResponse({'ok': 'ok'})
 # class FileFieldFormView(FormView):
 #     form_class = FileFieldForm
 #     template_name = "upload.html"  # Replace with your template.

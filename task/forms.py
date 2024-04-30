@@ -43,12 +43,12 @@ class PriorityForm(ModelForm):
 
 
 class FileForm(ModelForm):
-    path = forms.FileField(label='Загрузка', required=False,
+    file = forms.FileField(label='Загрузка', required=False,
                            widget=forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}))
 
     class Meta:
         model = File
-        fields = ['path']
+        fields = ['file']
 
 # Это не работает
 # class FileForm(forms.Form):

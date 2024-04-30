@@ -1,9 +1,10 @@
 from django.db import models
-from django.db.models import F
 from django.db.models.functions import Concat
 from django.forms import CharField
 from django.db.models import CharField, Value
 import typing
+
+
 
 
 # Create your models here.
@@ -42,6 +43,15 @@ class User(models.Model):
             return employees
         return None
 
+    @staticmethod
+    def find_by_id(id: int) -> "User" or None:
+        user = User.objects.filter(id=id)
+        if user:
+            return user[0]
+        return None
+
+
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -52,7 +62,7 @@ class UserProfile(models.Model):
 
     @staticmethod
     def get_or_create(user: User) -> 'UserProfile':
-        print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
+        #print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
         return UserProfile.objects.get_or_create(user=user)[0]
 
     def add_employee(self, user: User) -> None:

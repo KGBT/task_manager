@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body">
 
-                <form method="post" id="addTask">
+                <form method="post" id="addTask" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-floating mb-3">
                         {{ taskForm.name }}
@@ -67,8 +67,8 @@
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"
-                               for="{{ fileForm.path.id_for_label }}">{{ fileForm.path.label }}</label>
-                        {{ fileForm.path }}
+                               for="{{ fileForm.file.id_for_label }}">{{ fileForm.file.label }}</label>
+                        {{ fileForm.file }}
                     </div>
 
                 </form>
@@ -81,7 +81,7 @@
                 >
                     Закрыть
                 </button>
-                <button type="submit" form="addTask" class="btn btn-primary">
+                <button type="submit" form="addTask" class="btn btn-primary" id="btn-addTask">
                     Отправить
                 </button>
             </div>

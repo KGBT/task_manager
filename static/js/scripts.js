@@ -121,29 +121,55 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    // отслеживаем событие отправки формы
-    $('#addTask').submit(function (event) {
-        event.preventDefault();
-        // создаем AJAX-вызов
-        $.ajax({
-            data: $(this).serialize(), // получаяем данные формы
-            type: 'POST',
-            url: "add_task/",
-            // если успешно, то
-            success: function (response) {
-                console.log('В ajax post');
-                event.target.reset();
-                const addTask = document.getElementById('addTask');
-                addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+    const form = document.getElementById('addTask');
+    const btn = document.getElementById('btn-addTask');
 
-            },
-            // если ошибка, то
-            error: function (response) {
-                // предупредим об ошибке
-                console.log(response.responseJSON.errors)
-            }
-        });
-        return false;
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        btn.textContent = 'Отправка...';
+        btn.disabled = true;
+        console.log('in fetch')
+        fetch('add_task/', {
+            method: 'POST',
+            body: new FormData(form)
+        }).then((responce) => responce.json())
+            .then((data) => {
+                // console.log('Какой-то ответ!');
+                // console.log(data);
+                if (data.ok === 'ok') {
+                    e.target.reset();
+                    const addTask = document.getElementById('addTask');
+                    addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+                }
+                btn.textContent = 'Отправить';
+                btn.disabled = false;
+            });
     });
+
+    // отслеживаем событие отправки формы
+    // $('#addTask').submit(function (event) {
+    //     event.preventDefault();
+    //     // создаем AJAX-вызов
+    //     $.ajax({
+    //         data: $(this).serialize(), // получаяем данные формы
+    //         type: 'POST',
+    //         url: "add_task/",
+    //         // если успешно, то
+    //         success: function (response) {
+    //             console.log('В ajax post');
+    //             event.target.reset();
+    //             const addTask = document.getElementById('addTask');
+    //             addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
+    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+    //
+    //         },
+    //         // если ошибка, то
+    //         error: function (response) {
+    //             // предупредим об ошибке
+    //             console.log(response.responseJSON.errors)
+    //         }
+    //     });
+    //     return false;
+    // });
 })

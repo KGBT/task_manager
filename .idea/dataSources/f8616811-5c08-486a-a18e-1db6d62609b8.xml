@@ -499,7 +499,7 @@
     <routine id="190" parent="1" name="fts3_tokenizer"/>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-04-30.16:16:03</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-05-01.12:07:53</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -2142,206 +2142,210 @@ model</ColNames>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="685" parent="570">
+    <column id="685" parent="570" name="initiator">
+      <DasType>varchar(60)|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="686" parent="570">
       <ColNames>priority_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>task_priority</RefTableName>
     </foreign-key>
-    <index id="686" parent="570" name="task_task_priority_id_21397970">
+    <index id="687" parent="570" name="task_task_priority_id_21397970">
       <ColNames>priority_id</ColNames>
     </index>
-    <key id="687" parent="570">
+    <key id="688" parent="570">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="688" parent="571" name="id">
+    <column id="689" parent="571" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="689" parent="571" name="status_id">
+    <column id="690" parent="571" name="status_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="690" parent="571" name="task_id">
+    <column id="691" parent="571" name="task_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="691" parent="571" name="user_id">
+    <column id="692" parent="571" name="user_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="692" parent="571">
+    <foreign-key id="693" parent="571">
       <ColNames>status_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>task_status</RefTableName>
     </foreign-key>
-    <foreign-key id="693" parent="571">
+    <foreign-key id="694" parent="571">
       <ColNames>task_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>task_task</RefTableName>
     </foreign-key>
-    <foreign-key id="694" parent="571">
+    <foreign-key id="695" parent="571">
       <ColNames>user_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>user_user</RefTableName>
     </foreign-key>
-    <index id="695" parent="571" name="sqlite_autoindex_task_usertask_1">
+    <index id="696" parent="571" name="sqlite_autoindex_task_usertask_1">
       <ColNames>status_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="696" parent="571" name="task_usertask_task_id_c9559c63">
+    <index id="697" parent="571" name="task_usertask_task_id_c9559c63">
       <ColNames>task_id</ColNames>
     </index>
-    <index id="697" parent="571" name="task_usertask_user_id_0c445688">
+    <index id="698" parent="571" name="task_usertask_user_id_0c445688">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="698" parent="571">
+    <key id="699" parent="571">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="699" parent="571">
+    <key id="700" parent="571">
       <ColNames>status_id</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_task_usertask_1</UnderlyingIndexName>
     </key>
-    <column id="700" parent="572" name="id">
+    <column id="701" parent="572" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="701" parent="572" name="name">
+    <column id="702" parent="572" name="name">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="702" parent="572" name="surname">
+    <column id="703" parent="572" name="surname">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="703" parent="572" name="username">
+    <column id="704" parent="572" name="username">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="704" parent="572" name="email">
+    <column id="705" parent="572" name="email">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="705" parent="572" name="password">
+    <column id="706" parent="572" name="password">
       <DasType>varchar(1000)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <index id="706" parent="572" name="sqlite_autoindex_user_user_1">
+    <index id="707" parent="572" name="sqlite_autoindex_user_user_1">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="707" parent="572" name="sqlite_autoindex_user_user_2">
+    <index id="708" parent="572" name="sqlite_autoindex_user_user_2">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="708" parent="572">
+    <key id="709" parent="572">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="709" parent="572">
+    <key id="710" parent="572">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_user_user_1</UnderlyingIndexName>
     </key>
-    <key id="710" parent="572">
+    <key id="711" parent="572">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_user_user_2</UnderlyingIndexName>
     </key>
-    <column id="711" parent="573" name="id">
+    <column id="712" parent="573" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="712" parent="573" name="user_id">
+    <column id="713" parent="573" name="user_id">
       <DasType>bigint|0s</DasType>
       <Position>2</Position>
     </column>
-    <foreign-key id="713" parent="573">
+    <foreign-key id="714" parent="573">
       <ColNames>user_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>user_user</RefTableName>
     </foreign-key>
-    <index id="714" parent="573" name="sqlite_autoindex_user_userprofile_1">
+    <index id="715" parent="573" name="sqlite_autoindex_user_userprofile_1">
       <ColNames>user_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="715" parent="573">
+    <key id="716" parent="573">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="716" parent="573">
+    <key id="717" parent="573">
       <ColNames>user_id</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_user_userprofile_1</UnderlyingIndexName>
     </key>
-    <column id="717" parent="574" name="id">
+    <column id="718" parent="574" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="718" parent="574" name="userprofile_id">
+    <column id="719" parent="574" name="userprofile_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="719" parent="574" name="user_id">
+    <column id="720" parent="574" name="user_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <foreign-key id="720" parent="574">
+    <foreign-key id="721" parent="574">
       <ColNames>userprofile_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>user_userprofile</RefTableName>
     </foreign-key>
-    <foreign-key id="721" parent="574">
+    <foreign-key id="722" parent="574">
       <ColNames>user_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>user_user</RefTableName>
     </foreign-key>
-    <index id="722" parent="574" name="user_userprofile_employees_userprofile_id_user_id_5223a70f_uniq">
+    <index id="723" parent="574" name="user_userprofile_employees_userprofile_id_user_id_5223a70f_uniq">
       <ColNames>userprofile_id
 user_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="723" parent="574" name="user_userprofile_employees_userprofile_id_5e11e8be">
+    <index id="724" parent="574" name="user_userprofile_employees_userprofile_id_5e11e8be">
       <ColNames>userprofile_id</ColNames>
     </index>
-    <index id="724" parent="574" name="user_userprofile_employees_user_id_5c91fc21">
+    <index id="725" parent="574" name="user_userprofile_employees_user_id_5c91fc21">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="725" parent="574">
+    <key id="726" parent="574">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

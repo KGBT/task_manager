@@ -4,25 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Сделал шаблон с добавлением задачи. Много сделал переработок. Добавил js для валидации и отправки формы.">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/3eee6d89-c356-468c-82f5-8b74fe64e2b5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/3eee6d89-c356-468c-82f5-8b74fe64e2b5/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task/migrations/0002_rename_path_file_file_alter_task_priority.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Доделал добавление задачи.">
+      <change afterPath="$PROJECT_DIR$/static/img/file.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0002_alter_task_date_end.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/addTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/addTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,11 +87,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ivan\PycharmProjects\task_manager\static\img" />
+      <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\сайт" />
-      <recent name="C:\Users\ivan\PycharmProjects\task_manager\static\image" />
-      <recent name="C:\Users\ivan\PycharmProjects\task_manager\static\css" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.task_manager">
@@ -189,7 +183,8 @@
       <workItem from="1714374823542" duration="24967000" />
       <workItem from="1714457313454" duration="1024000" />
       <workItem from="1714458344204" duration="11865000" />
-      <workItem from="1714478943377" duration="13861000" />
+      <workItem from="1714478943377" duration="17879000" />
+      <workItem from="1714544456316" duration="23947000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -311,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714407202153</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Доделал добавление задачи.">
+      <option name="closed" value="true" />
+      <created>1714494071048</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1714494071048</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +358,8 @@
     <MESSAGE value="Закончил с боковой панелью." />
     <MESSAGE value="Переработал шаблоны. Перенес метод. Сделал верстку добавления задачи." />
     <MESSAGE value="Сделал шаблон с добавлением задачи. Много сделал переработок. Добавил js для валидации и отправки формы." />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал шаблон с добавлением задачи. Много сделал переработок. Добавил js для валидации и отправки формы." />
+    <MESSAGE value="Доделал добавление задачи." />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделал добавление задачи." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/task_manager$debug.coverage" NAME="debug Coverage Results" MODIFIED="1714397454231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ivan\PycharmProjects\task_manager" />

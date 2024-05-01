@@ -5,8 +5,6 @@ from django.db.models import CharField, Value
 import typing
 
 
-
-
 # Create your models here.
 class User(models.Model):
     name = models.CharField(max_length=30)
@@ -50,7 +48,8 @@ class User(models.Model):
             return user[0]
         return None
 
-
+    def get_full_name(self) -> str:
+        return self.name + ' ' + self.surname
 
 
 class UserProfile(models.Model):
@@ -62,7 +61,7 @@ class UserProfile(models.Model):
 
     @staticmethod
     def get_or_create(user: User) -> 'UserProfile':
-        #print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
+        # print(f'userprofil получить или создать {UserProfile.objects.get_or_create(user=user)[0]}')
         return UserProfile.objects.get_or_create(user=user)[0]
 
     def add_employee(self, user: User) -> None:

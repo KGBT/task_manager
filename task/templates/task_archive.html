@@ -1,0 +1,53 @@
+<div class="col">
+    <div class="card
+     {% if task.priority.priority == 'LOW' %}
+                border-primary
+                {% elif task.priority.priority == 'MEDIUM' %}
+                border-warning
+                {% else %}
+                border-danger
+                {% endif %}
+     h-100" style="max-width: 18rem">
+        <div class="card-header">
+            <h5>{{ task.name }}</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2">Инициатор:
+                {% if task.initiator %}
+                    {{ task.initiator }}
+                {% else %}
+                    Неизвестен
+                {% endif %}
+            </h6>
+            <h6 class="card-subtitle mb-2">Начало: {{ task.date_start|date:"d M Y" }}</h6>
+            <h6 class="card-subtitle mb-2">Завершение:
+                {% if task.date_end %}
+                    {{ task.date_end|date:"d M Y" }}
+                {% else %}
+                    Нет
+                {% endif %}
+            </h6>
+            <h6 class="card-subtitle mb-2">Приоритет:
+                {% if task.priority.priority == 'LOW' %}
+                    Низкий
+                {% elif task.priority.priority == 'MEDIUM' %}
+                    Средний
+                {% else %}
+                    Высокий
+                {% endif %}
+            </h6>
+            <p class="card-text">
+                Описание: <br>
+                {% if task.description == '' %}
+                {% else %}
+                    {{ task.description }}
+                {% endif %}
+            </p>
+        <p>Файл:</p>
+        </div>
+{#        <div class="card-footer">#}
+{#            #}
+{#        </div>#}
+    </div>
+</div>
+

@@ -139,7 +139,11 @@ $(document).ready(function () {
                 if (data.ok === 'ok') {
                     e.target.reset();
                     const addTask = document.getElementById('addTask');
-                    addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
+                    const alert = document.getElementById('alert-success');
+                    if (alert){
+                        alert.remove();
+                    }
+                    addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">Задача отправлена!
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
                 }
                 btn.textContent = 'Отправить';

@@ -1,20 +1,12 @@
-import json
-import random
 from datetime import date
 
-from django.core import serializers
-from django.core.exceptions import ValidationError
-from django.db.models.functions import Concat
+from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
-from django.contrib import messages
-from django.db.models import CharField, Value
 
 from task.forms import TaskForm, PriorityForm, FileForm
 from task.models import Task, Priority, Status, File, UserTask
-# from task.forms import TaskForm, FileFieldForm, FileForm
-from user.forms import UserForm
+
 from user.models import User, UserProfile
 
 
@@ -23,26 +15,65 @@ from user.models import User, UserProfile
 
 def tasks(request):
     user_login = User.find_by_username('nikitin')
-    user = User.objects.filter(name='ivan')
-    if not user:
-        user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
-        user_ivan.save()
-        user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
-        user_alex.save()
+    tasks = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    paginator = Paginator(tasks, per_page=8)
 
-        # 'taskForm': TaskForm( user_login.get_employees_for_choice()),
-    # user_login.get_employees_for_choice()
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    print(tasks.__dict__)
 
     context = {'taskForm': TaskForm(user_login=user_login), 'priorityForm': PriorityForm(),
                'fileForm': FileForm(),
-               'employees': user_login.get_employees()}
-
-    # context = {
-    #
-    #           }
+               'employees': user_login.get_employees(), 'tasks': tasks, 'page_obj': page_obj}
 
     return render(request, 'tasks.html', context)
 
+
+def tasks_inbox(request):
+    user_login = User.find_by_username('nikitin')
+    tasks_inbox = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    paginator = Paginator(tasks_inbox, per_page=9)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+
+    return render(request, 'inbox.html', context)
+
+
+def tasks_outbox(request):
+    user_login = User.find_by_username('nikitin')
+    tasks_outbox = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    paginator = Paginator(tasks_outbox, per_page=9)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+
+    return render(request, 'outbox.html', context)
+
+
+def tasks_archive(request):
+    user_login = User.find_by_username('nikitin')
+    tasks_archive = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    paginator = Paginator(tasks_archive, per_page=9)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+
+    return render(request, 'archive.html', context)
+
+
+def download_file(request, file_id):
+    uploaded_file = File.find_file_by_id(file_id)
+    response = HttpResponse(uploaded_file.file, content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename={0}'.format(uploaded_file.file.name)
+    return response
 
 def validate_task_name(request):
     name = request.GET.get('name')
@@ -107,7 +138,8 @@ def add_task(request):
         user_login = User.find_by_username('nikitin')
         user_employee = User.find_by_id(request.POST['executors'])
 
-        task = Task(name=request.POST['name'], description=request.POST['description'], date_start=date.today())
+        task = Task(name=request.POST['name'], description=request.POST['description'], date_start=date.today(),
+                    initiator='ivan nikitin')  # Заменить на авторизованного пользователя
 
         priority = Priority.get_or_create(request.POST['priority'])
         task.add_priority(priority)

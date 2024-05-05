@@ -1,13 +1,20 @@
-.exit{
-  color: red;
-  border: 2px;
-  border-color: red;
+.exit {
+    color: red;
+    border: 2px;
+    border-color: red;
 }
 
-.btn-border{
-  border-style: solid;
-  border: 2px;
+.btn-border {
+    border-style: solid;
+    border: 2px;
 }
-.card-footer{
-  background-color: white;
+
+.card-footer {
+    background-color: white;
+}
+
+.scroll-text{
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 120px;
 }

@@ -4,21 +4,17 @@
 
 
 
-    <div class="container pt-5 pb-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% include 'addTask.html' %}
 
-            {% include 'addTask.html' %}
+    {% for task in page_obj %}
+        {% include 'task.html' %}
+        {% include 'message_complete.html' %}
+    {% endfor %}
 
-            {% for task in page_obj %}
-                {% include 'task.html' %}
-            {% endfor %}
 
-        </div>
-    </div>
-
-{#{% for task in tasks %}#}
-{#    {{ task.file_set.get.id}}<br/><br/>#}
-{#    {% endfor %}#}
+    {#{% for task in tasks %}#}
+    {#    {{ task.file_set.get.id}}<br/><br/>#}
+    {#    {% endfor %}#}
 
 {% endblock content %}
 

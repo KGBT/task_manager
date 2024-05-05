@@ -4,13 +4,15 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %} Задачи {% endblock title %}</title>
+    {#    {% load static %}#}
+    {#    <link rel="stylesheet" href="/static/css/styles.css">#}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     {% load django_bootstrap5 %}
     {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 {% block base %}{% endblock base %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

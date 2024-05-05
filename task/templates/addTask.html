@@ -1,21 +1,23 @@
 <div class="col">
-    <div class="card border-secondary h-100" style="max-width: 18rem">
+    <div class="card border-secondary h-100" style="max-width: 18rem; ">
+{#        <a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"#}
+{#           style="width: 100%; height: 100%; font-size: 30px" href="">Добавить задачу</a>#}
         <button
                 type="button"
                 class="btn btn-outline-secondary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                style="padding-top: 50%; padding-bottom: 50%; font-size: 30px"
+                data-bs-target="#ModalAdd"
+                style="width: 100%; height: 100%; font-size: 30px; min-height: 150px;"
         >
             Добавить задачу
         </button>
     </div>
 </div>
-
+{#style="padding-top: 50%; padding-bottom: 50%; font-size: 30px"#}
 <!-- Модальное окно -->
 <div
         class="modal fade"
-        id="exampleModal"
+        id="ModalAdd"
         tabindex="-1"
         aria-labelledby="modalLabel"
         aria-hidden="true"

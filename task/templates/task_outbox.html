@@ -1,6 +1,8 @@
 <div class="col">
     <div class="card
-     {% if task.priority.priority == 'LOW' %}
+    {% if task.usertask_set__status.status == 'complete' %}
+    border-success
+     {% elif task.priority.priority == 'LOW' %}
                 border-primary
                 {% elif task.priority.priority == 'MEDIUM' %}
                 border-warning
@@ -19,12 +21,19 @@
                     Неизвестен
                 {% endif %}
             </h6>
-            <h6 class="card-subtitle mb-2">Начало: {{ task.date_start|date:"d M Y" }}</h6>
+            <h6 class="card-subtitle mb-2">Начало: {{ task.date_start|date:"d m y" }}</h6>
             <h6 class="card-subtitle mb-2">Завершение:
                 {% if task.date_end %}
-                    {{ task.date_end|date:"d M Y" }}
+                    {{ task.date_end|date:"d m y" }}
                 {% else %}
                     Нет
+                {% endif %}
+            </h6>
+            <h6 class="card-subtitle mb-2">Статус:
+                {% if task.usertask_set__status.status == 'complete' %}
+                    Завершена
+                {% elif task.usertask_set__status.status == 'failed' %}
+                    Просрочена
                 {% endif %}
             </h6>
             <h6 class="card-subtitle mb-2">Приоритет:
@@ -36,17 +45,29 @@
                     Высокий
                 {% endif %}
             </h6>
-            <p class="card-text">
-                Описание: <br>
-                {% if task.description == '' %}
-                {% else %}
+
+
+            {% if task.description == '' %}
+            {% else %}
+                Описание:
+                <p class="card-text" style="overflow: auto;
+    overflow-x: hidden;
+    max-height: 120px;">
                     {{ task.description }}
-                {% endif %}
-            </p>
-        <p>Файл:</p>
+                </p>
+            {% endif %}
+
+            {% if task.file_set.get %}
+                <a href="{% url 'download_file' task.file_set.get.id %}"><img src="/static/img/file.png" alt="file"
+                                                                              style="width: 30px;"
+                                                                              class="d-inline-block align-text-top"></a>
+            {% endif %}
+
         </div>
-        <div class="card-footer">
-            <a href="#" class="btn
+        <div class="card-footer d-flex justify-content-between">
+
+
+            <a href="{% url 'archive_task' task.id %}" class="btn
             {% if task.priority.priority == 'LOW' %}
                 btn-outline-primary
                 {% elif task.priority.priority == 'MEDIUM' %}
@@ -54,6 +75,17 @@
                 {% else %}
                 btn-outline-danger
                 {% endif %}">В архив</a>
+
+            <a href="{% url 'delete_task' task.id %}" class="btn
+            {% if task.priority.priority == 'LOW' %}
+                btn-outline-primary
+                {% elif task.priority.priority == 'MEDIUM' %}
+                btn-outline-warning
+                {% else %}
+                btn-outline-danger
+                {% endif %}">Удалить</a>
+
+
         </div>
     </div>
 </div>

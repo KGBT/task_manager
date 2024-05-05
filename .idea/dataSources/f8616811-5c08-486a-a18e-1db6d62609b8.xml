@@ -499,7 +499,7 @@
     <routine id="190" parent="1" name="fts3_tokenizer"/>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-05-01.12:07:53</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-05-05.18:05:37</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -2105,46 +2105,46 @@ model</ColNames>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="677" parent="569" name="message">
-      <DasType>text|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <key id="678" parent="569">
+    <key id="677" parent="569">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="679" parent="570" name="id">
+    <column id="678" parent="570" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="680" parent="570" name="name">
+    <column id="679" parent="570" name="name">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="681" parent="570" name="description">
+    <column id="680" parent="570" name="description">
       <DasType>text|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="682" parent="570" name="date_start">
+    <column id="681" parent="570" name="date_start">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="683" parent="570" name="date_end">
+    <column id="682" parent="570" name="date_end">
       <DasType>date|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="684" parent="570" name="priority_id">
+    <column id="683" parent="570" name="priority_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="685" parent="570" name="initiator">
+    <column id="684" parent="570" name="initiator">
       <DasType>varchar(60)|0s</DasType>
       <Position>7</Position>
+    </column>
+    <column id="685" parent="570" name="message">
+      <DasType>text|0s</DasType>
+      <Position>8</Position>
     </column>
     <foreign-key id="686" parent="570">
       <ColNames>priority_id</ColNames>

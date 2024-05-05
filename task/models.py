@@ -14,6 +14,7 @@ class Task(models.Model):
     date_start = models.DateField()
     date_end = models.DateField(blank=True, null=True)
     initiator = models.CharField(max_length=60, blank=True, null=True)
+    message = models.TextField(max_length=1000, blank=True, null=True)
     priority = models.ForeignKey('Priority', on_delete=models.PROTECT)
 
     def __str__(self):
@@ -26,10 +27,17 @@ class Task(models.Model):
         self.priority_id = priority.id
 
     @staticmethod
-    def get_tasks_with_priority_and_files(username: str, status: str) -> 'QuerySet':
+    def get_tasks_with_priority_and_files(username: str, status: [str]) -> 'QuerySet':
         return Task.objects.filter(users__username=username,
-                                   usertask__status__status=status).all().prefetch_related(
-            'priority', 'file_set').order_by('id')  # объединение всех таблиц
+                                   usertask__status__status__in=status).all().prefetch_related(
+            'priority', 'file_set', 'usertask_set__status').order_by('-date_start')  # объединение всех таблиц
+
+    @staticmethod
+    def find_task_by_id(id: int) -> 'Task' or None:
+        task = Task.objects.filter(id=id)
+        if task:
+            return task[0]
+        return None
 
 
 class Priority(models.Model):
@@ -69,7 +77,6 @@ class Status(models.Model):
         (ARCHIVED, 'Archived'),
     )
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=INBOX)
-    message = models.TextField(max_length=1000, blank=True, null=True)
 
     @staticmethod
     def create(status: str) -> 'Status':
@@ -93,6 +100,40 @@ class UserTask(models.Model):
     def create_user_task(user: 'User', task: 'Task', status: 'Status') -> None:
         user_task = UserTask.objects.create(user=user, task=task, status=status)
         user_task.save()
+
+    @staticmethod
+    def find_status_by_task_and_status(task_id: int, status: str) -> 'Status' or None:
+        status = UserTask.objects.filter(task_id=task_id, status__status=status)
+        if status:
+            return status[0]
+        return None
+
+    def find_statuses_by_task_and_statuses(task_id: int, statuses: [str]) -> 'Status' or None:
+        status_list = []
+        for status in statuses:
+            st = UserTask.find_status_by_task_and_status(task_id, status)
+            # print(status)
+            # print(st)
+            if st:
+                status_list.append(st)
+
+        if status_list:
+            return status_list
+        return None
+
+    @staticmethod
+    def find_user_tasks_by_id_task_for_delete(task_id: int) -> 'UserTask' or None:
+        task = UserTask.objects.filter(task_id=task_id)
+        if task:
+            return task.all()
+        return None
+
+    @staticmethod
+    def find_statuses_by_id_task_for_delete(task_id: int) -> 'UserTask' or None:
+        task = UserTask.objects.filter(task_id=task_id)
+        if task:
+            return task.all()
+        return None
 
 
 class File(models.Model):

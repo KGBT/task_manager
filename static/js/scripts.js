@@ -94,7 +94,7 @@ $(document).ready(function () {
             url: "validate_description/",
             // если успешно, то
             success: function (response) {
-                console.log('В ajax');
+
                 if (response.is_max_length == true) {
                     const alert = document.getElementById('nameError');
                     if (!alert) {
@@ -140,7 +140,7 @@ $(document).ready(function () {
                     e.target.reset();
                     const addTask = document.getElementById('addTask');
                     const alert = document.getElementById('alert-success');
-                    if (alert){
+                    if (alert) {
                         alert.remove();
                     }
                     addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">Задача отправлена!
@@ -150,30 +150,87 @@ $(document).ready(function () {
                 btn.disabled = false;
             });
     });
+})
+
+$(document).ready(function () {
 
     // отслеживаем событие отправки формы
-    // $('#addTask').submit(function (event) {
-    //     event.preventDefault();
-    //     // создаем AJAX-вызов
-    //     $.ajax({
-    //         data: $(this).serialize(), // получаяем данные формы
-    //         type: 'POST',
-    //         url: "add_task/",
-    //         // если успешно, то
-    //         success: function (response) {
-    //             console.log('В ajax post');
-    //             event.target.reset();
-    //             const addTask = document.getElementById('addTask');
-    //             addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
-    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
-    //
-    //         },
-    //         // если ошибка, то
-    //         error: function (response) {
-    //             // предупредим об ошибке
-    //             console.log(response.responseJSON.errors)
-    //         }
-    //     });
-    //     return false;
-    // });
+    $('#id_message').keyup(function () {
+        // создаем AJAX-вызов
+        $.ajax({
+            datatype: 'json',
+            data: $(this).serialize(), // получаяем данные формы
+            url: "validate_message/",
+            // если успешно, то
+            success: function (response) {
+                if (response.is_max_length_mess == true) {
+                    const alert = document.getElementById('nameErrorMess');
+                    if (!alert) {
+                        $('#id_message').addClass('is-invalid');
+                        $('#id_message').after('<div class="invalid-feedback d-block" id="nameErrorMess">Не более 1000 символов.</div>');
+                    }
+                } else {
+
+                    $('#id_message').removeClass('is-invalid');
+                    $('#nameErrorMess').remove();
+                }
+            },
+            // если ошибка, то
+            error: function (response) {
+                // предупредим об ошибке
+                console.log(response.responseJSON.errors)
+            }
+        });
+        return false;
+    });
 })
+
+
+// $(document).ready(function () {
+//
+//     const acceptTask = document.getElementById('acceptTask')
+//     console.log('В скрипте!')
+//     acceptTask.forEach(function (acceptTask) {
+//         acceptTask.addEventListener('click', function () {
+//             $.ajax({
+//                 url: `${acceptTask.getAttribute('href')}`,
+//                 type: 'GET',
+//                 success: function (response) {
+//                     console.log('Принято!')
+//                 },
+//                 // если ошибка, то
+//                 error: function (response) {
+//                     // предупредим об ошибке
+//                     console.log(response.errors)
+//                 }
+//             });
+//             return false;
+//         });
+//     })
+// })
+
+// отслеживаем событие отправки формы
+// $('#addTask').submit(function (event) {
+//     event.preventDefault();
+//     // создаем AJAX-вызов
+//     $.ajax({
+//         data: $(this).serialize(), // получаяем данные формы
+//         type: 'POST',
+//         url: "add_task/",
+//         // если успешно, то
+//         success: function (response) {
+//             console.log('В ajax post');
+//             event.target.reset();
+//             const addTask = document.getElementById('addTask');
+//             addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-error-emp">Задача отправлена!
+//             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+//
+//         },
+//         // если ошибка, то
+//         error: function (response) {
+//             // предупредим об ошибке
+//             console.log(response.responseJSON.errors)
+//         }
+//     });
+//     return false;
+// });

@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.core.paginator import Paginator
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from task.forms import TaskForm, PriorityForm, FileForm
@@ -15,13 +15,13 @@ from user.models import User, UserProfile
 
 def tasks(request):
     user_login = User.find_by_username('nikitin')
-    tasks = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    tasks = Task.get_tasks_with_priority_and_files('terkin', [Status.ACCEPTED])
     paginator = Paginator(tasks, per_page=8)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    print(tasks.__dict__)
+    # print(tasks.__dict__)
 
     context = {'taskForm': TaskForm(user_login=user_login), 'priorityForm': PriorityForm(),
                'fileForm': FileForm(),
@@ -32,7 +32,7 @@ def tasks(request):
 
 def tasks_inbox(request):
     user_login = User.find_by_username('nikitin')
-    tasks_inbox = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    tasks_inbox = Task.get_tasks_with_priority_and_files('terkin', [Status.INBOX])
     paginator = Paginator(tasks_inbox, per_page=9)
 
     page_number = request.GET.get('page')
@@ -45,7 +45,9 @@ def tasks_inbox(request):
 
 def tasks_outbox(request):
     user_login = User.find_by_username('nikitin')
-    tasks_outbox = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    tasks_outbox = Task.get_tasks_with_priority_and_files('nikitin', [Status.OUTBOX, Status.COMPLETED])
+    # print(tasks_outbox.__dict__)
+    # print(tasks_outbox)
     paginator = Paginator(tasks_outbox, per_page=9)
 
     page_number = request.GET.get('page')
@@ -58,7 +60,7 @@ def tasks_outbox(request):
 
 def tasks_archive(request):
     user_login = User.find_by_username('nikitin')
-    tasks_archive = Task.get_tasks_with_priority_and_files('terkin', Status.INBOX)
+    tasks_archive = Task.get_tasks_with_priority_and_files('terkin', [Status.ARCHIVED])
     paginator = Paginator(tasks_archive, per_page=9)
 
     page_number = request.GET.get('page')
@@ -75,6 +77,73 @@ def download_file(request, file_id):
     response['Content-Disposition'] = 'attachment; filename={0}'.format(uploaded_file.file.name)
     return response
 
+
+def reject_task(request, task_id):
+    user_task_inbox = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.INBOX)
+    # user_task_outbox = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.OUTBOX)
+    print(user_task_inbox)
+    print(request.POST)
+    print(request.GET)
+    # if user_task_inbox and user_task_outbox:
+    #     user_task_inbox.status.status = Status.REJECTED
+    #     user_task_outbox.status.status = Status.REJECTED
+    #     task = Task.find_task_by_id(task_id)
+    #     # task.message = request.POST['message']
+    #     print(task_id)
+    #     print(request.POST['message'])
+    #     # task.save()
+    #     # user_task_inbox.status.save()
+    #     # user_task_outbox.status.save()
+    return HttpResponse('Какая-то kegf')
+
+
+def complete_task(request, task_id):
+    user_login = User.find_by_username('nikitin')
+    print(f'Айдишник задачи {task_id}')
+    usertask = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.COMPLETED)
+    print(request)
+
+    # if usertask:
+    #     usertask.status.status = Status.OUTBOX
+    #     usertask.status.save()
+    # print(usertask)
+
+    return HttpResponseRedirect('/tasks')
+
+
+def delete_task(request, task_id):
+    delete_user_tasks = UserTask.find_user_tasks_by_id_task_for_delete(task_id=task_id)
+
+    print(delete_user_tasks)
+    task = Task.find_task_by_id(task_id)
+    task.delete()
+    if delete_user_tasks:
+        for user_task in delete_user_tasks:
+            user_task.status.delete()
+            user_task.delete()
+
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def archive_task(request, task_id):
+    user_task_statuses = UserTask.find_statuses_by_task_and_statuses(task_id=task_id,
+                                                                     statuses=[Status.OUTBOX, Status.ACCEPTED])
+    if user_task_statuses:
+        for user_task_status in user_task_statuses:
+            user_task_status.status.status = Status.ARCHIVED
+            user_task_status.status.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def accept_task(request, task_id):
+    user_task_status = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.INBOX)
+    if user_task_status:
+        user_task_status.status.status = Status.ACCEPTED
+        user_task_status.status.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def validate_task_name(request):
     name = request.GET.get('name')
     context: dict = {'is_empty': False, 'is_max_length': False}
@@ -90,6 +159,14 @@ def validate_description(request):
     context: dict = {'is_max_length': False}
     if len(description) > 1000:
         context['is_max_length'] = True
+    return JsonResponse(context)
+
+
+def validate_message(request):
+    message = request.GET.get('message')
+    context: dict = {'is_max_length_mess': False}
+    if len(message) > 1000:
+        context['is_max_length_mess'] = True
     return JsonResponse(context)
 
 
@@ -132,8 +209,8 @@ def add_employee(request):
 
 
 def add_task(request):
-    print(request.POST)
-    print(request.FILES)
+    # print(request.POST)
+    # print(request.FILES)
     if request.method == 'POST':
         user_login = User.find_by_username('nikitin')
         user_employee = User.find_by_id(request.POST['executors'])

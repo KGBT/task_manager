@@ -4,17 +4,13 @@
 
 
 
-    <div class="container pt-5 pb-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
 
 
+    {% for task in page_obj %}
+        {% include 'task_inbox.html' %}
+        {% include 'message_rejected.html' %}
+    {% endfor %}
 
-            {% for task in page_obj %}
-                {% include 'task_inbox.html' %}
-            {% endfor %}
-
-        </div>
-    </div>
 
 
 {% endblock content %}

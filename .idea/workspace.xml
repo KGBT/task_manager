@@ -4,20 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Доделал добавление задачи.">
-      <change afterPath="$PROJECT_DIR$/static/img/file.jpg" afterDir="false" />
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Сделал пагинацию, загрузку файлов с сервера, добавил шаблоны по нав панели.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/addTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/addTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/archive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/outbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/task_archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/task_archive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/task_inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/task_inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/task_outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/task_outbox.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/сайт/asdas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/сайт/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/сайт/rezerv.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pagination.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +195,11 @@
       <workItem from="1714457313454" duration="1024000" />
       <workItem from="1714458344204" duration="11865000" />
       <workItem from="1714478943377" duration="17879000" />
-      <workItem from="1714544456316" duration="23947000" />
+      <workItem from="1714544456316" duration="24104000" />
+      <workItem from="1714827662137" duration="9116000" />
+      <workItem from="1714886132064" duration="4293000" />
+      <workItem from="1714890545265" duration="1082000" />
+      <workItem from="1714894584776" duration="27023000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -314,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714494071048</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Сделал пагинацию, загрузку файлов с сервера, добавил шаблоны по нав панели.">
+      <option name="closed" value="true" />
+      <created>1714580330754</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1714580330754</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +382,8 @@
     <MESSAGE value="Переработал шаблоны. Перенес метод. Сделал верстку добавления задачи." />
     <MESSAGE value="Сделал шаблон с добавлением задачи. Много сделал переработок. Добавил js для валидации и отправки формы." />
     <MESSAGE value="Доделал добавление задачи." />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал добавление задачи." />
+    <MESSAGE value="Сделал пагинацию, загрузку файлов с сервера, добавил шаблоны по нав панели." />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал пагинацию, загрузку файлов с сервера, добавил шаблоны по нав панели." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/task_manager$debug.coverage" NAME="debug Coverage Results" MODIFIED="1714397454231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ivan\PycharmProjects\task_manager" />

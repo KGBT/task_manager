@@ -19,10 +19,10 @@
                     Неизвестен
                 {% endif %}
             </h6>
-            <h6 class="card-subtitle mb-2">Начало: {{ task.date_start|date:"d M Y" }}</h6>
+            <h6 class="card-subtitle mb-2">Начало: {{ task.date_start|date:"d m y" }}</h6>
             <h6 class="card-subtitle mb-2">Завершение:
                 {% if task.date_end %}
-                    {{ task.date_end|date:"d M Y" }}
+                    {{ task.date_end|date:"d m y" }}
                 {% else %}
                     Нет
                 {% endif %}
@@ -36,17 +36,22 @@
                     Высокий
                 {% endif %}
             </h6>
-            <p class="card-text">
-                Описание: <br>
-                {% if task.description == '' %}
-                {% else %}
+
+
+            {% if task.description == '' %}
+            {% else %}
+                Описание:
+                <p class="card-text" style="overflow: auto;
+    overflow-x: hidden;
+    max-height: 120px;">
                     {{ task.description }}
-                {% endif %}
-            </p>
-            {#            <span>Файл: {{ task.file_set.get }}</span>#}
+                </p>
+            {% endif %}
+
             {% if task.file_set.get %}
-                <a href="{% url 'download_file' task.file_set.get.id %}"><img src="/static/img/file.png" alt="file" style="width: 30px;"
-                     class="d-inline-block align-text-top"></a>
+                <a href="{% url 'download_file' task.file_set.get.id %}"><img src="/static/img/file.png" alt="file"
+                                                                              style="width: 30px;"
+                                                                              class="d-inline-block align-text-top"></a>
             {% endif %}
 
         </div>
@@ -58,7 +63,12 @@
                 btn-outline-warning
                 {% else %}
                 btn-outline-danger
-                {% endif %}">Завершить</a>
+                {% endif %}"
+               data-bs-toggle="modal"
+               data-bs-target="#MessageModal{{ task.id }}"
+            >Завершить</a>
+            {{ task.id }}
+
         </div>
     </div>
 </div>

@@ -28,9 +28,10 @@ class Task(models.Model):
 
     @staticmethod
     def get_tasks_with_priority_and_files(username: str, status: [str]) -> 'QuerySet':
-        return Task.objects.filter(users__username=username,
-                                   usertask__status__status__in=status).all().prefetch_related(
-            'priority', 'file_set', 'usertask_set__status').order_by('-date_start')  # объединение всех таблиц
+        return Task.objects.prefetch_related(
+            'priority', 'file_set', 'usertask_set__status').filter(users__username=username,
+                                                                   usertask__status__status__in=status).all().order_by(
+            '-date_start')  # объединение всех таблиц
 
     @staticmethod
     def find_task_by_id(id: int) -> 'Task' or None:
@@ -108,32 +109,48 @@ class UserTask(models.Model):
             return status[0]
         return None
 
+    @staticmethod
     def find_statuses_by_task_and_statuses(task_id: int, statuses: [str]) -> 'Status' or None:
         status_list = []
         for status in statuses:
             st = UserTask.find_status_by_task_and_status(task_id, status)
-            # print(status)
-            # print(st)
             if st:
                 status_list.append(st)
-
         if status_list:
             return status_list
         return None
 
     @staticmethod
-    def find_user_tasks_by_id_task_for_delete(task_id: int) -> 'UserTask' or None:
+    def find_user_tasks_by_task_id(task_id: int) -> 'UserTask' or None:
         task = UserTask.objects.filter(task_id=task_id)
+        print('Из метода')
         if task:
             return task.all()
         return None
 
     @staticmethod
-    def find_statuses_by_id_task_for_delete(task_id: int) -> 'UserTask' or None:
-        task = UserTask.objects.filter(task_id=task_id)
-        if task:
-            return task.all()
-        return None
+    def __get_count_tasks(user_id: int, statuses: [str]) -> int:
+        return UserTask.objects.filter(status__status__in=statuses, user_id=user_id).count()
+
+    @staticmethod
+    def count_tasks(user_id: int) -> int:
+        return UserTask.__get_count_tasks(user_id, [Status.ACCEPTED, Status.FAILED])
+
+    @staticmethod
+    def count_inbox_tasks(user_id: int) -> int:
+        return UserTask.__get_count_tasks(user_id, [Status.INBOX])
+
+    @staticmethod
+    def count_outbox_tasks(user_id: int) -> int:
+        return UserTask.__get_count_tasks(user_id, [Status.OUTBOX, Status.FAILED, Status.COMPLETED])
+
+
+    @staticmethod
+    def find_usertask_by_user_id_and_statuses(user_id: int, statuses: [str]) -> 'QuerySet':
+        return UserTask.objects.filter(user_id=user_id, status__status__in=statuses).all().prefetch_related('task',
+                                                                                                            'task__priority',
+                                                                                                            'task__file_set').order_by(
+            '-task__date_start')  # объединение всех таблиц
 
 
 class File(models.Model):

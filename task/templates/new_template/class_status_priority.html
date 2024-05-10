@@ -1,0 +1,11 @@
+{% if usertask.status.status == 'Completed' %}
+    border-success
+    {% elif usertask.status.status == 'Failed' %}
+    border-danger
+{% elif usertask.task.priority.priority == 'LOW' %}
+    border-primary
+{% elif usertask.task.priority.priority == 'MEDIUM' %}
+    border-warning
+{% else %}
+    border-danger
+{% endif %}

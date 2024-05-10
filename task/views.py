@@ -3,6 +3,7 @@ from datetime import date
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.template.defaulttags import register
 
 from task.forms import TaskForm, PriorityForm, FileForm
 from task.models import Task, Priority, Status, File, UserTask
@@ -14,59 +15,64 @@ from user.models import User, UserProfile
 
 
 def tasks(request):
+    user_login = User.find_by_username('terkin')
+    # tasks = Task.get_tasks_with_priority_and_files('terkin', [Status.ACCEPTED])
+    usertasks_tasks = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
+                                                                     statuses=[Status.ACCEPTED, Status.FAILED])
+
     user_login = User.find_by_username('nikitin')
-    tasks = Task.get_tasks_with_priority_and_files('terkin', [Status.ACCEPTED])
-    paginator = Paginator(tasks, per_page=8)
+    paginator = Paginator(usertasks_tasks, per_page=8)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # print(tasks.__dict__)
-
     context = {'taskForm': TaskForm(user_login=user_login), 'priorityForm': PriorityForm(),
                'fileForm': FileForm(),
-               'employees': user_login.get_employees(), 'tasks': tasks, 'page_obj': page_obj}
+               'page_obj': page_obj
+               }
 
     return render(request, 'tasks.html', context)
 
 
 def tasks_inbox(request):
-    user_login = User.find_by_username('nikitin')
-    tasks_inbox = Task.get_tasks_with_priority_and_files('terkin', [Status.INBOX])
-    paginator = Paginator(tasks_inbox, per_page=9)
+    user_login = User.find_by_username('terkin')
+    usertasks_inbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id, statuses=[Status.INBOX])
+    paginator = Paginator(usertasks_inbox, per_page=9)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+    context = {'page_obj': page_obj}
 
     return render(request, 'inbox.html', context)
 
 
 def tasks_outbox(request):
     user_login = User.find_by_username('nikitin')
-    tasks_outbox = Task.get_tasks_with_priority_and_files('nikitin', [Status.OUTBOX, Status.COMPLETED])
-    # print(tasks_outbox.__dict__)
-    # print(tasks_outbox)
-    paginator = Paginator(tasks_outbox, per_page=9)
+    usertasks_outbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
+                                                                      statuses=[Status.OUTBOX, Status.COMPLETED,
+                                                                                Status.FAILED])
+
+    paginator = Paginator(usertasks_outbox, per_page=9)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+    context = {'page_obj': page_obj}
 
     return render(request, 'outbox.html', context)
 
 
 def tasks_archive(request):
     user_login = User.find_by_username('nikitin')
-    tasks_archive = Task.get_tasks_with_priority_and_files('terkin', [Status.ARCHIVED])
-    paginator = Paginator(tasks_archive, per_page=9)
+    usertasks_archive = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
+                                                                       statuses=[Status.ARCHIVED])
+    paginator = Paginator(usertasks_archive, per_page=9)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'employees': user_login.get_employees(), 'page_obj': page_obj}
+    context = {'page_obj': page_obj}
 
     return render(request, 'archive.html', context)
 
@@ -78,31 +84,13 @@ def download_file(request, file_id):
     return response
 
 
-def reject_task(request, task_id):
-    user_task_inbox = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.INBOX)
-    # user_task_outbox = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.OUTBOX)
-    print(user_task_inbox)
-    print(request.POST)
-    print(request.GET)
-    # if user_task_inbox and user_task_outbox:
-    #     user_task_inbox.status.status = Status.REJECTED
-    #     user_task_outbox.status.status = Status.REJECTED
-    #     task = Task.find_task_by_id(task_id)
-    #     # task.message = request.POST['message']
-    #     print(task_id)
-    #     print(request.POST['message'])
-    #     # task.save()
-    #     # user_task_inbox.status.save()
-    #     # user_task_outbox.status.save()
-    return HttpResponse('Какая-то kegf')
-
-
-def complete_task(request, task_id):
+def complete_task(request):
     user_login = User.find_by_username('nikitin')
-    print(f'Айдишник задачи {task_id}')
-    usertask = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.COMPLETED)
-    print(request)
 
+    # usertask = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.COMPLETED)
+    print(request.POST)
+    # print('Айдишник таски' + request.POST['task_id'])
+    # print('Сообщение' + request.POST['message'])
     # if usertask:
     #     usertask.status.status = Status.OUTBOX
     #     usertask.status.save()
@@ -122,7 +110,6 @@ def delete_task(request, task_id):
             user_task.status.delete()
             user_task.delete()
 
-
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -141,6 +128,20 @@ def accept_task(request, task_id):
     if user_task_status:
         user_task_status.status.status = Status.ACCEPTED
         user_task_status.status.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def reject_task(request):
+    task_id = request.POST.get('task_id')
+    message = request.POST.get('message')
+    user_tasks = UserTask.find_user_tasks_by_task_id(task_id=task_id)
+    if user_tasks:
+        if message:
+            user_tasks[0].task.message = message
+            user_tasks[0].task.save()
+        for user_task in user_tasks:
+            user_task.status.status = Status.REJECTED
+            user_task.status.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -182,6 +183,7 @@ def scripts(request):
     return HttpResponse('ok')
 
 
+# Доднлать добавление работников обоим пользователям!
 def add_employee(request):
     user_employee = User.find_by_username(request.POST['username'])
 
@@ -200,6 +202,7 @@ def add_employee(request):
             user_profile_login.add_employee(user_employee)
             context['is_add'] = True
             context['message'] = 'Сотрудник добавлен!'
+            context['id'] = user_employee.id
             context['full_name'] = user_employee.username + ' ' + user_employee.surname
     else:
         context['is_not'] = True
@@ -238,6 +241,7 @@ def add_task(request):
         UserTask.create_user_task(user_employee, task, status_for_employee)
 
     return JsonResponse({'ok': 'ok'})
+
 # class FileFieldFormView(FormView):
 #     form_class = FileFieldForm
 #     template_name = "upload.html"  # Replace with your template.
@@ -257,43 +261,3 @@ def add_task(request):
 #             ...  # спросить у Владислава
 #         return super().form_valid()
 #
-
-# def index(request):
-#     # if request.POST:
-#     #     username = request.POST['username']
-#     #     user = User.find_by_username(username)
-#     #     if user:
-#     #         if not Employee.exists(username):
-#     #             emp = Employee.create_and_save(user)
-#     #         else:
-#     #             emp = Employee.find_by_username(username)
-#     #         user_temp = User.find_by_username('nikitin')
-#     #         Employee.set_user(emp, user_temp)
-#     #         messages.add_message(request, messages.SUCCESS, 'Сотрудник добавлен!')
-#     #     else:
-#     #         messages.add_message(request, messages.ERROR, 'Пользователь с таким именем не найден!')
-#     #     return redirect(request.META.get('HTTP_REFERER', '/'))
-#     user_login = User.find_by_username('nikitin')
-#     context = {'employees': user_login.get_employees()}
-#     user = User.objects.filter(name='ivan')
-#     if not user:
-#         user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
-#         user_ivan.save()
-#         user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
-#         user_alex.save()
-#     return render(request, 'header.html', context)
-
-
-# user_profile_employee = UserProfile.get_or_create(user_login)
-# UserProfile.add_employee(user_profile_employee, user_login)
-# print(f'работник из вью {user_login.userprofile.employees.all()}',
-#       )  # доступ к работникам
-# print(type(user_login.userprofile.employees.all()))
-
-
-# name_emp = user_login.userprofile.employees.filter(username='nikitin').values().annotate(
-#     full_name=Concat('name', Value(' '), 'surname', output_field=CharField()))
-# full_name = name_emp[0]['full_name']
-# print(full_name, 'asdsasdasdasdas')
-# context['full_name'] = full_name
-# context['user'] = serializers.serialize('json',[user_login])

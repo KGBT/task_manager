@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% block add_task %}
+    {% endblock add_task %}
+
+
+    {% for usertask in page_obj %}
+        {% block tasks %}
+        {% endblock tasks %}
+    {% endfor %}
+
+
+{% endblock content %}
+

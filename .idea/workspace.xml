@@ -5,26 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Немного сделал основной функционал. Что-то переработал.">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task/templates/utils/class_status.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3eee6d89-c356-468c-82f5-8b74fe64e2b5/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/file.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/base_task.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/base_task.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/archive.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/inbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/outbox.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/templates/objective/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/utils/button.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/button.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/utils/class_status_priority.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/utils/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/utils/addTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/add_task.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +52,9 @@
     &quot;accountId&quot;: &quot;fae7bb19-d8f6-499b-bb6e-9fce09ef84ad&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -84,7 +76,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR",
     "git-widget-placeholder": "dev",
-    "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager/db.sqlite3",
+    "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -95,6 +87,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ivan\PycharmProjects\task_manager" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\new_template" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\ненужное" />

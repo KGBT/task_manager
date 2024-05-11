@@ -47,37 +47,34 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     // отслеживаем событие отправки формы
-    $('#id_name').keyup(function () {
+    $('#id_name').keyup(function (e) {
 
-        // создаем AJAX-вызов
         $.ajax({
-            datatype: 'json',
-            data: $(this).serialize(), // получаяем данные формы
-            url: "validate_task_name/",
-            // если успешно, то
-            success: function (response) {
-                console.log('В ajax');
-
-                if (response.is_empty == true || response.is_max_length == true) {
-                    const alert = document.getElementById('nameError');
-                    if (!alert) {
-                        $('#id_name').addClass('is-invalid');
-                        $('#id_name').after('<div class="invalid-feedback d-block" id="nameError">Это обятательное поле! Не более 50 символов.</div>');
+                datatype: 'json',
+                data: {'name': e.target.value},
+                url: "validate_task_name/",
+                success: function (response) {
+                    const btn = document.getElementById('btn-addTask');
+                    if (response.is_empty || response.is_max_length) {
+                        const alert = document.getElementById('nameError');
+                        e.target.classList.add('is-invalid');
+                        btn.disabled = true;
+                        if (!alert) {
+                            e.target.insertAdjacentHTML('afterend', '<div class="invalid-feedback d-block" id="nameError">Это обятательное поле! Не более 50 символов.</div>');
+                        }
+                    } else {
+                        if (e.target.classList.contains('is-invalid')) {
+                            btn.disabled = false;
+                            e.target.classList.remove('is-invalid');
+                            $('#nameError').remove();
+                        }
                     }
-                } else {
-
-                    $('#id_name').removeClass('is-invalid');
-                    $('#nameError').remove();
+                },
+                error: function (response) {
+                    console.log(response.responseJSON.errors)
                 }
+            });
 
-            },
-            // если ошибка, то
-            error: function (response) {
-                // предупредим об ошибке
-                console.log(response.responseJSON.errors)
-            }
-        });
-        return false;
     });
 })
 
@@ -85,36 +82,32 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     // отслеживаем событие отправки формы
-    $('#id_description').keyup(function () {
-
-        // создаем AJAX-вызов
-        $.ajax({
-            datatype: 'json',
-            data: $(this).serialize(), // получаяем данные формы
-            url: "validate_description/",
-            // если успешно, то
-            success: function (response) {
-
-                if (response.is_max_length == true) {
-                    const alert = document.getElementById('nameError');
-                    if (!alert) {
-                        $('#id_description').addClass('is-invalid');
-                        $('#id_description').after('<div class="invalid-feedback d-block" id="nameError">Не более 1000 символов.</div>');
+    $('#id_description').keyup(function (e) {
+         $.ajax({
+                datatype: 'json',
+                data: {'description': e.target.value},
+                url: "validate_description/",
+                success: function (response) {
+                    const btn = document.getElementById('btn-addTask');
+                    if (response.is_max_length) {
+                        const alert = document.getElementById('nameError');
+                        e.target.classList.add('is-invalid');
+                        btn.disabled = true;
+                        if (!alert) {
+                            e.target.insertAdjacentHTML('afterend', '<div class="invalid-feedback d-block" id="nameError">Не более 1000 символов.</div>');
+                        }
+                    } else {
+                        if (e.target.classList.contains('is-invalid')) {
+                            btn.disabled = false;
+                            e.target.classList.remove('is-invalid');
+                            $('#nameError').remove();
+                        }
                     }
-                } else {
-
-                    $('#id_description').removeClass('is-invalid');
-                    $('#nameError').remove();
+                },
+                error: function (response) {
+                    console.log(response.responseJSON.errors)
                 }
-
-            },
-            // если ошибка, то
-            error: function (response) {
-                // предупредим об ошибке
-                console.log(response.responseJSON.errors)
-            }
-        });
-        return false;
+            });
     });
 })
 

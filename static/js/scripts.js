@@ -124,32 +124,35 @@ $(document).ready(function () {
     const form = document.getElementById('addTask');
     const btn = document.getElementById('btn-addTask');
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        btn.textContent = 'Отправка...';
-        btn.disabled = true;
-        console.log('in fetch')
-        fetch('add_task/', {
-            method: 'POST',
-            body: new FormData(form)
-        }).then((responce) => responce.json())
-            .then((data) => {
-                // console.log('Какой-то ответ!');
-                // console.log(data);
-                if (data.ok === 'ok') {
-                    e.target.reset();
-                    const addTask = document.getElementById('addTask');
-                    const alert = document.getElementById('alert-success');
-                    if (alert) {
-                        alert.remove();
-                    }
-                    addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">Задача отправлена!
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            btn.textContent = 'Отправка...';
+            btn.disabled = true;
+            console.log('in fetch')
+            fetch('add_task/', {
+                method: 'POST',
+                body: new FormData(form)
+            }).then((responce) => responce.json())
+                .then((data) => {
+                    // console.log('Какой-то ответ!');
+                    // console.log(data);
+                    if (data.ok === 'ok') {
+                        e.target.reset();
+                        const addTask = document.getElementById('addTask');
+                        const alert = document.getElementById('alert-success');
+                        if (alert) {
+                            alert.remove();
+                        }
+                        addTask.insertAdjacentHTML('beforebegin', `<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">Задача отправлена!
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
-                }
-                btn.textContent = 'Отправить';
-                btn.disabled = false;
-            });
-    });
+                    }
+                    btn.textContent = 'Отправить';
+                    btn.disabled = false;
+                });
+        });
+    }
+
 })
 
 

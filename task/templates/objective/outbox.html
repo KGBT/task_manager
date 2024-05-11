@@ -1,23 +1,13 @@
 {% extends 'base_task.html' %}
 
-{% block class_status_priority %}
-    {% include 'utils/class_status_priority.html' %}
-{% endblock class_status_priority %}
+{% block class_status %}
+    {% include 'utils/class_status.html' with class='border' %}
+{% endblock class_status %}
 
 {% block answer %}
-    <h6 class="card-subtitle mb-2">Статус:
-        {% if usertask.status.status == 'complete' %}
-            Завершена
-        {% elif usertask.status.status == 'failed' %}
-            Просрочена
-        {% elif usertask.status.status == 'accepted' %}
-            Выполняется
-        {% elif usertask.status.status == 'rejected' %}
-            Отклонена
-        {% endif %}
-    </h6>
 
-    {% if usertask.task.message != '' or usertask.task.message != None %}
+
+    {% if usertask.task.message %}
 
         <hr>
         Сообщение:

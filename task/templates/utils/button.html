@@ -9,19 +9,7 @@
     {% url 'delete_task' usertask.task.id %}
     {% endif %}
 "
-   class="btn
-   {% if usertask.status.status == 'Completed' %}
-    btn-outline-success
-    {% elif usertask.status.status == 'Failed' %}
-    btn-outline-danger
-{% elif usertask.task.priority.priority == 'LOW' %}
-    btn-outline-primary
-{% elif usertask.task.priority.priority == 'MEDIUM' %}
-     btn-outline-warning
-{% else %}
-     btn-outline-danger
-{% endif %}
-"
+   class="btn {% include 'utils/class_status.html' with class='btn-outline' %}"
         {% if is_modal == 'true' %}
    data-bs-toggle="modal"
    data-bs-target="#MessageModal{{ usertask.task.id }}"

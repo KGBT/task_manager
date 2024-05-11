@@ -31,7 +31,7 @@ def tasks(request):
                'page_obj': page_obj
                }
 
-    return render(request, 'tasks.html', context)
+    return render(request, 'objective/tasks.html', context)
 
 
 def tasks_inbox(request):
@@ -44,7 +44,7 @@ def tasks_inbox(request):
 
     context = {'page_obj': page_obj}
 
-    return render(request, 'inbox.html', context)
+    return render(request, 'objective/inbox.html', context)
 
 
 def tasks_outbox(request):
@@ -60,7 +60,7 @@ def tasks_outbox(request):
 
     context = {'page_obj': page_obj}
 
-    return render(request, 'outbox.html', context)
+    return render(request, 'objective/outbox.html', context)
 
 
 def tasks_archive(request):
@@ -74,7 +74,7 @@ def tasks_archive(request):
 
     context = {'page_obj': page_obj}
 
-    return render(request, 'archive.html', context)
+    return render(request, 'objective/archive.html', context)
 
 
 def download_file(request, file_id):

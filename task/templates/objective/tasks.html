@@ -1,0 +1,29 @@
+{% extends 'base_task.html' %}
+
+{% block add_task %}
+    {% include 'utils/addTask.html' %}
+{% endblock add_task %}
+
+{% block class_status_priority %}
+    {% include 'utils/class_status_priority.html' %}
+{% endblock class_status_priority %}
+
+{% block answer %}
+
+    <h6 class="card-subtitle mb-2">Статус:
+        {% if usertask.status.status == 'failed' %}
+            Просрочена
+        {% elif usertask.status.status == 'accepted' %}
+            Выполняется
+        {% endif %}
+    </h6>
+
+{% endblock answer %}
+
+{% block footer_card %}
+    {% include 'utils/button.html' with url='#' is_modal='true' text_button='Завершить' %}
+{% endblock footer_card %}
+
+{% block message %}
+    {% include 'utils/message.html' with url='complete' %}
+{% endblock message %}

@@ -1,0 +1,17 @@
+{% extends 'base_task.html' %}
+
+
+{% block class_status_priority %}
+    {% include 'utils/class_status_priority.html' %}
+{% endblock class_status_priority %}
+
+{% block footer_card %}
+
+{% include 'utils/button.html' with url='accept' is_modal='false' text_button='Принять' %}
+{% include 'utils/button.html' with url='#' is_modal='true' text_button='Отклонить' %}
+
+{% endblock footer_card %}
+
+{% block message %}
+    {% include 'utils/message.html' with url='reject' %}
+{% endblock message %}

@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="addMessage" action="
+                <form method="post" id="addMessage{{ usertask.task.id  }}" action="
                 {% if url == 'complete' %}
                 {% url 'complete_task' %}
                 {% elif url == 'reject' %}
@@ -27,7 +27,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                <button type="submit" class="btn btn-primary" form="addMessage">Завершить{{ usertask.task.id }}</button>
+                <button type="submit" class="btn btn-primary" form="addMessage{{ usertask.task.id  }}" id="btn-complete">Завершить{{ usertask.task.id }}</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,15 @@
+{% if usertask.status.status == 'inbox' %}
+    {{ class }}-info
+{% elif usertask.status.status == 'outbox' %}
+    {{ class }}-info
+{% elif usertask.status.status == 'completed' %}
+    {{ class }}-success
+{% elif usertask.status.status == 'failed' %}
+    {{ class }}-danger
+{% elif usertask.status.status == 'rejected' %}
+    {{ class }}-dark
+{% elif usertask.status.status == 'accepted' %}
+    {{ class }}-primary
+{% elif usertask.status.status == 'archived' %}
+    {{ class }}-secondary
+{% endif %}

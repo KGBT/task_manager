@@ -1,71 +1,90 @@
 {% extends 'base_content.html' %}
+{% load static %}
 {% block tasks %}
-<div class="col">
-    <div class="card
-    {% block class_status_priority %}
-    {% endblock class_status_priority %}
+    <div class="col">
+        <div class="card
+    {% block class_status %}
+    {% endblock class_status %}
      h-100" style="max-width: 18rem">
-        <div class="card-header">
-            <h5>{{ usertask.task.name }}</h5>
-        </div>
-        <div class="card-body">
-            <h6 class="card-subtitle mb-2">Инициатор:
-                {% if usertask.task.initiator %}
-                    {{ usertask.task.initiator }}
-                {% else %}
-                    Неизвестен
-                {% endif %}
-            </h6>
-            <h6 class="card-subtitle mb-2">Начало: {{ usertask.task.date_start|date:"d m y" }}</h6>
-            <h6 class="card-subtitle mb-2">Завершение:
-                {% if usertask.task.date_end %}
-                    {{ usertask.task.date_end|date:"d m y" }}
-                {% else %}
-                    Нет
-                {% endif %}
-            </h6>
-            <h6 class="card-subtitle mb-2">Приоритет:
-                {% if usertask.task.priority.priority == 'LOW' %}
-                    Низкий
-                {% elif usertask.task.priority.priority == 'MEDIUM' %}
-                    Средний
-                {% else %}
-                    Высокий
-                {% endif %}
-            </h6>
+            <div class="card-header">
+                <h5>{{ usertask.task.name }}</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2">Инициатор:
+                    {% if usertask.task.initiator %}
+                        {{ usertask.task.initiator }}
+                    {% else %}
+                        Неизвестен
+                    {% endif %}
+                </h6>
+                <h6 class="card-subtitle mb-2">Начало: {{ usertask.task.date_start|date:"d m y" }}</h6>
+                <h6 class="card-subtitle mb-2">Завершение:
+                    {% if usertask.task.date_end %}
+                        {{ usertask.task.date_end|date:"d m y" }}
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </h6>
+                <h6 class="card-subtitle mb-2">Приоритет:
+                    {% if usertask.task.priority.priority == 'LOW' %}
+                        Низкий
+                    {% elif usertask.task.priority.priority == 'MEDIUM' %}
+                        Средний
+                    {% else %}
+                        Высокий
+                    {% endif %}
+                </h6>
 
 
-            {% if usertask.task.description == '' %}
-            {% else %}
-                Описание:
-                <p class="card-text" style="overflow: auto;
+                <h6 class="card-subtitle mb-2">Статус:
+                    {% if usertask.status.status == 'inbox' %}
+                        Входящая
+                    {% elif usertask.status.status == 'outbox' %}
+                        Исходящая
+                    {% elif usertask.status.status == 'completed' %}
+                        Завершена
+                    {% elif usertask.status.status == 'failed' %}
+                        Просрочена
+                    {% elif usertask.status.status == 'rejected' %}
+                        Отклонена
+                    {% elif usertask.status.status == 'accepted' %}
+                        В работе
+                    {% elif usertask.status.status == 'archived' %}
+                        Архив
+                    {% endif %}
+                </h6>
+
+
+                {% if usertask.task.description == '' %}
+                {% else %}
+                    Описание:
+                    <p class="card-text" style="overflow: auto;
     overflow-x: hidden;
     max-height: 120px;">
-                    {{ usertask.task.description }}
-                </p>
-            {% endif %}
+                        {{ usertask.task.description }}
+                    </p>
+                {% endif %}
 
-            {% if usertask.task.file_set.get %}
-                <a href="{% url 'download_file' usertask.task.file_set.get.id %}"><img src="/img/file.png"
-                                                                                       alt="file"
-                                                                                       style="width: 30px;"
-                                                                                       class="d-inline-block align-text-top"></a>
-            {% endif %}
+                {% if usertask.task.file_set.get %}
+                    <a href="{% url 'download_file' usertask.task.file_set.get.id %}"><img
+                            src="{% static 'img/file.png' %}"
+                            alt="file"
+                            style="width: 30px;"
+                            class="d-inline-block align-text-top"></a>
+                {% endif %}
 
-            {% block answer %}
-            {% endblock answer %}
+                {% block answer %}
+                {% endblock answer %}
 
-        </div>
-        <div class="card-footer d-flex justify-content-between">
-            {% block footer_card %}
-
-
-            {% endblock footer_card %}
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                {% block footer_card %}
+                {% endblock footer_card %}
+            </div>
         </div>
     </div>
-</div>
 
-{% block message %}
-{% endblock message %}
+    {% block message %}
+    {% endblock message %}
 
 {% endblock tasks %}

@@ -1,9 +1,9 @@
+import os
 from datetime import date
 
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.template.defaulttags import register
+from django.shortcuts import render
 
 from task.forms import TaskForm, PriorityForm, FileForm
 from task.models import Task, Priority, Status, File, UserTask
@@ -16,7 +16,7 @@ from user.models import User, UserProfile
 
 def tasks(request):
     user_login = User.find_by_username('terkin')
-    # tasks = Task.get_tasks_with_priority_and_files('terkin', [Status.ACCEPTED])
+
     usertasks_tasks = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                      statuses=[Status.ACCEPTED, Status.FAILED])
 
@@ -36,7 +36,8 @@ def tasks(request):
 
 def tasks_inbox(request):
     user_login = User.find_by_username('terkin')
-    usertasks_inbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id, statuses=[Status.INBOX])
+    usertasks_inbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
+                                                                     statuses=[Status.INBOX, Status.FAILED])
     paginator = Paginator(usertasks_inbox, per_page=9)
 
     page_number = request.GET.get('page')
@@ -51,7 +52,8 @@ def tasks_outbox(request):
     user_login = User.find_by_username('nikitin')
     usertasks_outbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                       statuses=[Status.OUTBOX, Status.COMPLETED,
-                                                                                Status.FAILED])
+                                                                                Status.FAILED, Status.ACCEPTED,
+                                                                                Status.REJECTED])
 
     paginator = Paginator(usertasks_outbox, per_page=9)
 
@@ -77,113 +79,73 @@ def tasks_archive(request):
     return render(request, 'objective/archive.html', context)
 
 
-def download_file(request, file_id):
-    uploaded_file = File.find_file_by_id(file_id)
-    response = HttpResponse(uploaded_file.file, content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename={0}'.format(uploaded_file.file.name)
-    return response
-
-
 def complete_task(request):
-    user_login = User.find_by_username('nikitin')
-
-    # usertask = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.COMPLETED)
-    print(request.POST)
-    # print('Айдишник таски' + request.POST['task_id'])
-    # print('Сообщение' + request.POST['message'])
-    # if usertask:
-    #     usertask.status.status = Status.OUTBOX
-    #     usertask.status.save()
-    # print(usertask)
-
-    return HttpResponseRedirect('/tasks')
-
-
-def delete_task(request, task_id):
-    delete_user_tasks = UserTask.find_user_tasks_by_id_task_for_delete(task_id=task_id)
-
-    print(delete_user_tasks)
-    task = Task.find_task_by_id(task_id)
-    task.delete()
-    if delete_user_tasks:
-        for user_task in delete_user_tasks:
-            user_task.status.delete()
-            user_task.delete()
-
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-def archive_task(request, task_id):
-    user_task_statuses = UserTask.find_statuses_by_task_and_statuses(task_id=task_id,
-                                                                     statuses=[Status.OUTBOX, Status.ACCEPTED])
-    if user_task_statuses:
-        for user_task_status in user_task_statuses:
-            user_task_status.status.status = Status.ARCHIVED
-            user_task_status.status.save()
+    task_id = request.POST.get('task_id')
+    message = request.POST.get('message')
+    usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id, statuses=[Status.ACCEPTED, Status.FAILED])
+    if usertasks:
+        for usertask in usertasks:
+            usertask.status.status = Status.COMPLETED
+            usertask.status.save()
+            if message and (usertask.task.message == None or usertask.task.message == ''):
+                usertask.task.message = message
+                usertask.task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def accept_task(request, task_id):
-    user_task_status = UserTask.find_status_by_task_and_status(task_id=task_id, status=Status.INBOX)
-    if user_task_status:
-        user_task_status.status.status = Status.ACCEPTED
-        user_task_status.status.save()
+    usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
+                                                    statuses=[Status.INBOX, Status.OUTBOX, Status.FAILED])
+    if usertasks:
+        for usertask in usertasks:
+            usertask.status.status = Status.ACCEPTED
+            usertask.status.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def reject_task(request):
     task_id = request.POST.get('task_id')
     message = request.POST.get('message')
-    user_tasks = UserTask.find_user_tasks_by_task_id(task_id=task_id)
-    if user_tasks:
-        if message:
-            user_tasks[0].task.message = message
-            user_tasks[0].task.save()
-        for user_task in user_tasks:
-            user_task.status.status = Status.REJECTED
-            user_task.status.save()
+    usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
+                                                    statuses=[Status.INBOX, Status.OUTBOX, Status.FAILED])
+    if usertasks:
+        for usertask in usertasks:
+            usertask.status.status = Status.REJECTED
+            usertask.status.save()
+            if message and (usertask.task.message == None or usertask.task.message == ''):
+                usertask.task.message = message
+                usertask.task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def validate_task_name(request):
-    name = request.GET.get('name')
-    context: dict = {'is_empty': False, 'is_max_length': False}
-    if name == '':
-        context['is_empty'] = True
-    elif len(name) > 50:
-        context['is_max_length'] = True
-    return JsonResponse(context)
+def delete_task(request, task_id):
+    usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
+                                                    statuses=[Status.ACCEPTED, Status.FAILED, Status.INBOX,
+                                                              Status.OUTBOX, Status.REJECTED])
+    if usertasks:
+        for usertask in usertasks:
+            usertask.status.delete()
+            usertask.delete()
+        task = Task.find_task_by_id(task_id)
+        file = File.find_file_by_id_task(task_id)
+        if file:
+            file.delete()
+        task.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def validate_description(request):
-    description = request.GET.get('description')
-    context: dict = {'is_max_length': False}
-    if len(description) > 1000:
-        context['is_max_length'] = True
-    return JsonResponse(context)
+def archive_task(request, task_id):
+    usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
+                                                    statuses=[Status.OUTBOX, Status.ACCEPTED, Status.FAILED,
+                                                              Status.INBOX, Status.REJECTED, Status.COMPLETED])
+    if usertasks:
+        for usertask in usertasks:
+            usertask.status.status = Status.ARCHIVED
+            usertask.status.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def validate_message(request):
-    message = request.GET.get('message')
-    context: dict = {'is_max_length_mess': False}
-    if len(message) > 1000:
-        context['is_max_length_mess'] = True
-    return JsonResponse(context)
-
-
-def scripts(request):
-    user = User.find_by_username(username='nikitin')
-    if not user:
-        user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
-        user_ivan.save()
-        user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
-        user_alex.save()
-    user_profile_employee = UserProfile.get_or_create(user)
-    user_profile_employee.add_employee(user)
-    return HttpResponse('ok')
-
-
-# Доднлать добавление работников обоим пользователям!
+# Додeлать добавление работников обоим пользователям!
 def add_employee(request):
     user_employee = User.find_by_username(request.POST['username'])
 
@@ -242,22 +204,47 @@ def add_task(request):
 
     return JsonResponse({'ok': 'ok'})
 
-# class FileFieldFormView(FormView):
-#     form_class = FileFieldForm
-#     template_name = "upload.html"  # Replace with your template.
-#     success_url = "..."  # Replace with your URL or reverse().
-#
-#     def post(self, request, *args, **kwargs):
-#         form_class = self.get_form_class()
-#         form = self.get_form(form_class)
-#         if form.is_valid():
-#             return self.form_valid(form)
-#         else:
-#             return self.form_invalid(form)
-#
-#     def form_valid(self, form):
-#         files = form.cleaned_data["file_field"]
-#         for f in files:
-#             ...  # спросить у Владислава
-#         return super().form_valid()
-#
+
+def download_file(request, file_id):
+    uploaded_file = File.find_file_by_id(file_id)
+    response = HttpResponse(uploaded_file.file, content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename={0}'.format(uploaded_file.file.name)
+    return response
+
+
+def validate_task_name(request):
+    name = request.GET.get('name')
+    context: dict = {'is_empty': False, 'is_max_length': False}
+    if name == '':
+        context['is_empty'] = True
+    elif len(name) > 50:
+        context['is_max_length'] = True
+    return JsonResponse(context)
+
+
+def validate_description(request):
+    description = request.GET.get('description')
+    context: dict = {'is_max_length': False}
+    if len(description) > 1000:
+        context['is_max_length'] = True
+    return JsonResponse(context)
+
+
+def validate_message(request):
+    message = request.GET.get('message')
+    context: dict = {'is_max_length_mess': False}
+    if len(message) > 1000:
+        context['is_max_length_mess'] = True
+    return JsonResponse(context)
+
+
+def scripts(request):
+    user = User.find_by_username(username='nikitin')
+    if not user:
+        user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
+        user_ivan.save()
+        user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
+        user_alex.save()
+    user_profile_employee = UserProfile.get_or_create(user)
+    user_profile_employee.add_employee(user)
+    return HttpResponse('ok')

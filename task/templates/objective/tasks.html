@@ -4,19 +4,12 @@
     {% include 'utils/addTask.html' %}
 {% endblock add_task %}
 
-{% block class_status_priority %}
-    {% include 'utils/class_status_priority.html' %}
-{% endblock class_status_priority %}
+{% block class_status %}
+    {% include 'utils/class_status.html' with class='border' %}
+{% endblock class_status %}
 
 {% block answer %}
 
-    <h6 class="card-subtitle mb-2">Статус:
-        {% if usertask.status.status == 'failed' %}
-            Просрочена
-        {% elif usertask.status.status == 'accepted' %}
-            Выполняется
-        {% endif %}
-    </h6>
 
 {% endblock answer %}
 

@@ -5,13 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Немного сделал основной функционал. Что-то переработал.">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task/templates/utils/class_status.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/file.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/logo1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/inbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/outbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/base_task.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/base_task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/archive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/outbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/utils/button.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/button.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/utils/class_status_priority.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/utils/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,28 +72,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Django Server.task_manager.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.debug.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ivan/PycharmProjects/task_manager/venv&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.task_manager.executor": "Debug",
+    "Python.debug.executor": "Debug",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager/db.sqlite3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\new_template" />

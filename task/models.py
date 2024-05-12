@@ -3,13 +3,14 @@ from datetime import date
 
 from django.db import models
 
+from task_manager import settings
 from user.models import User
 
 
 # Create your models here.
 
 class Task(models.Model):
-    users = models.ManyToManyField(User, through='UserTask')
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='UserTask')
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000, null=True, blank=True)
     date_start = models.DateField()
@@ -84,7 +85,7 @@ class Status(models.Model):
 
 
 class UserTask(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     status = models.OneToOneField(Status, on_delete=models.CASCADE)
 
@@ -117,11 +118,13 @@ class UserTask(models.Model):
 
     @staticmethod
     def count_outbox_tasks(user_id: int) -> int:
-        return UserTask.__get_count_tasks(user_id, [Status.OUTBOX, Status.FAILED, Status.COMPLETED])
+        return UserTask.__get_count_tasks(user_id, [Status.OUTBOX, Status.COMPLETED,
+                                                    Status.FAILED, Status.ACCEPTED,
+                                                    Status.REJECTED])
 
     @staticmethod
     def find_usertask_by_user_id_and_statuses(user_id: int, statuses: [str]) -> 'QuerySet':
-        usertasks = (UserTask.objects.filter(user_id=user_id, status__status__in=statuses).all()
+        usertasks = (UserTask.objects.filter(user_id=user_id, status__status__in=statuses).all().distinct()
                      .prefetch_related('task', 'task__priority', 'task__file_set').order_by('-task__date_start'))
         if Status.FAILED in statuses:
             for usertask in usertasks:

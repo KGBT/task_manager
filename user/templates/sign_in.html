@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+
+{% block sign_in_up %}
+
+    <div class="d-flex justify-content-center">
+
+        <form action="" method="post" class="row g-2 m-auto mt-5 d-flex justify-content-center"
+              style="max-width: 720px;">
+            <h2>Пожалуйста войдите:</h2>
+            {% csrf_token %}
+            <div class="col-md-12 form-floating  mb-3 ">
+                <input
+                        class="form-control {% if sign_in_form.non_field_errors %}is-invalid{% endif %}"
+                        type="{{ sign_in_form.username.widget.input_type }}"
+                        name="{{ sign_in_form.username.html_name }}"
+                        id="{{ sign_in_form.username.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_in_form.username.id_for_label }}">{{ sign_in_form.username.label }}</label>
+            </div>
+
+
+            <div class="col-md-12 form-floating  mb-3 ">
+                <input
+                        class="form-control {% if sign_in_form.non_field_errors %}is-invalid{% endif %}"
+                        type="password"
+                        name="{{ sign_in_form.password.html_name }}"
+                        id="{{ sign_in_form.password.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_in_form.password.id_for_label }}">{{ sign_in_form.password.label }}</label>
+                {% if sign_in_form.non_field_errors %}
+                    <div class="invalid-feedback d-block">{{ sign_in_form.non_field_errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <a class="btn btn-secondary col-md-5 m-2" href="{% url 'sign_up' %}" role="button">Зарегистрироваться</a>
+            <button type="submit" class="btn btn-primary col-md-5 m-2">Войти</button>
+
+        </form>
+
+    </div>
+
+
+
+{% endblock sign_in_up %}

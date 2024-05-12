@@ -1,7 +1,8 @@
+from django.contrib.auth import get_user_model
+
 from user.models import User
 
 
-def get_employees(request):
-    user = request.user
-    user_log = User.find_by_username('nikitin')  # заглушка
-    return {'employees': user_log.get_employees()}
+# def get_employees(request):
+#     user_login = request.user
+#     return {'employees': user_login.get_employees()}

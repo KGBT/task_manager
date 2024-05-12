@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+
+
+{% block sign_in_up %}
+
+    <div class="d-flex justify-content-center">
+
+        <form action="" method="post" class="row g-2 m-auto mt-5 d-flex justify-content-center"
+              style="max-width: 720px;">
+            <h2>Регистрация</h2>
+            {% csrf_token %}
+            <div class="col-md-12 form-floating  mb-3 ">
+                <input
+                        class="form-control {% if sign_up_form.username.errors %}is-invalid{% endif %}"
+                        type="{{ sign_up_form.username.widget.input_type }}"
+                        name="{{ sign_up_form.username.html_name }}"
+                        id="{{ sign_up_form.username.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.username.id_for_label }}">{{ sign_up_form.username.label }}</label>
+                {% if sign_up_form.username.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.username.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-6 form-floating  mb-3">
+                <input
+                        class="form-control {% if sign_up_form.first_name.errors %}is-invalid{% endif %}"
+                        type="{{ sign_up_form.first_name.widget.input_type }}"
+                        name="{{ sign_up_form.first_name.html_name }}"
+                        id="{{ sign_up_form.first_name.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.first_name.id_for_label }}">{{ sign_up_form.first_name.label }}</label>
+                {% if sign_up_form.first_name.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.first_name.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-6 form-floating  mb-3">
+                <input
+                        class="form-control {% if sign_up_form.last_name.errors %}is-invalid{% endif %}"
+                        type="{{ sign_up_form.last_name.widget.input_type }}"
+                        name="{{ sign_up_form.last_name.html_name }}"
+                        id="{{ sign_up_form.last_name.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.last_name.id_for_label }}">{{ sign_up_form.last_name.label }}</label>
+                {% if sign_up_form.last_name.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.last_name.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-12 form-floating  mb-3">
+                <input
+                        class="form-control {% if sign_up_form.email.errors %}is-invalid{% endif %}"
+                        type="{{ sign_up_form.email.widget.input_type }}"
+                        name="{{ sign_up_form.email.html_name }}"
+                        id="{{ sign_up_form.email.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.email.id_for_label }}">{{ sign_up_form.email.label }}</label>
+                {% if sign_up_form.email.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.email.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-12 form-floating  mb-3">
+                <input
+                        class="form-control {% if sign_up_form.password1.errors %}is-invalid{% endif %}"
+                        type="password"
+                        name="{{ sign_up_form.password1.html_name }}"
+                        id="{{ sign_up_form.password1.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.password1.id_for_label }}">{{ sign_up_form.password1.label }}</label>
+                {% if sign_up_form.password1.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.password1.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-12 form-floating  mb-3">
+                <input
+                        class="form-control {% if sign_up_form.password2.errors %}is-invalid{% endif %}"
+                        type="password"
+                        name="{{ sign_up_form.password2.html_name }}"
+                        id="{{ sign_up_form.password2.id_for_label }}"
+                        placeholder=""
+                        required
+                >
+                <label for="{{ sign_up_form.password2.id_for_label }}">{{ sign_up_form.password2.label }}</label>
+                {% if sign_up_form.password2.errors %}
+                    <div class="invalid-feedback d-block">{{ sign_up_form.password2.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+
+            <a class="btn btn-secondary col-md-5 m-2" href="{% url 'sign_in' %}" role="button">Назад</a>
+            <button type="submit" class="btn btn-primary col-md-5 m-2">Зарегистрироваться</button>
+
+        </form>
+
+    </div>
+
+
+
+{% endblock sign_in_up %}

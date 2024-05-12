@@ -1,5 +1,6 @@
 {% load static %}
-
+{% load task_tags %}
+{% load user_tags %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <button
@@ -28,19 +29,19 @@
                         class="nav-item d-flex justify-content-between align-items-center"
                 >
                     <a class="nav-link active" aria-current="page" href="/tasks">Задачи</a>
-                    <span class="badge bg-primary rounded-pill">{{ tasks_count }}</span>
+                    {% count_tasks auth_user=user %}
                 </li>
                 <li
                         class="nav-item d-flex justify-content-between align-items-center"
                 >
                     <a class="nav-link" href="/tasks/inbox">Входящие</a>
-                    <span class="badge bg-primary rounded-pill">{{ inbox_count }}</span>
+                    {% count_inbox_tasks auth_user=user %}
                 </li>
                 <li
                         class="nav-item d-flex justify-content-between align-items-center"
                 >
                     <a class="nav-link" href="/tasks/outbox">Исходящие</a>
-                    <span class="badge bg-primary rounded-pill">{{ outbox_count }}</span>
+                    {% count_outbox_tasks auth_user=user %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/tasks/archive">Архив</a>
@@ -69,11 +70,12 @@
                             Сотрудники
                         </button>
                     </li>
-{#                    <li>#}
-{#                        <button class="dropdown-item" type="button">Настройки</button>#}
-{#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <button class="dropdown-item" type="button">Настройки</button>#}
+                    {#                    </li>#}
                     <li>
-                        <button class="dropdown-item exit" type="button">Выйти</button>
+                        <a class="dropdown-item exit" href="/log_out" role="button">Выйти</a>
+                        {#                        <button class="dropdown-item exit" type="button">Выйти</button>#}
                     </li>
                 </ul>
             </div>
@@ -111,10 +113,7 @@
         <ul class="list-group" id="list-employees">
             <li class="list-group-item" id="item-employee">Список сотрудников</li>
 
-            {% for emp in employees %}
-                <li class="list-group-item">{{ emp.name }} {{ emp.surname }}</li>
-            {% empty %}
-            {% endfor %}
+            {% get_employees auth_user=user %}
 
         </ul>
     </div>

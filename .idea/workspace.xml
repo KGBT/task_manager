@@ -4,16 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Немного сделал основной функционал. Что-то переработал.">
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Подредактировал скрипты.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3eee6d89-c356-468c-82f5-8b74fe64e2b5/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8616811-5c08-486a-a18e-1db6d62609b8/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/task_manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/task_manager.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/utils/addTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/add_task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/context_processors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/migrations/0002_rename_path_file_file_alter_task_priority.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/migrations/0003_task_initiator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/migrations/0004_remove_status_message_task_message.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/context_processors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +90,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR",
     "git-widget-placeholder": "dev",
-    "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager",
+    "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager/user/templates/templatetags",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,14 +102,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ivan\PycharmProjects\task_manager\user\templates\templatetags" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ivan\PycharmProjects\task_manager\user" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\new_template" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates\ненужное" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\static\img" />
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates" />
-      <recent name="C:\Users\ivan\PycharmProjects\task_manager" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.task_manager">
@@ -197,6 +212,9 @@
       <workItem from="1715326321301" duration="427000" />
       <workItem from="1715329636220" duration="13588000" />
       <workItem from="1715348941360" duration="2397000" />
+      <workItem from="1715491706588" duration="4654000" />
+      <workItem from="1715501595821" duration="16794000" />
+      <workItem from="1715530772689" duration="7083000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -342,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714932726291</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Подредактировал скрипты.">
+      <option name="closed" value="true" />
+      <created>1715449847983</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715449847983</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +415,8 @@
     <MESSAGE value="Доделал добавление задачи." />
     <MESSAGE value="Сделал пагинацию, загрузку файлов с сервера, добавил шаблоны по нав панели." />
     <MESSAGE value="Немного сделал основной функционал. Что-то переработал." />
-    <option name="LAST_COMMIT_MESSAGE" value="Немного сделал основной функционал. Что-то переработал." />
+    <MESSAGE value="Подредактировал скрипты." />
+    <option name="LAST_COMMIT_MESSAGE" value="Подредактировал скрипты." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/task_manager$debug.coverage" NAME="debug Coverage Results" MODIFIED="1714397454231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ivan\PycharmProjects\task_manager" />

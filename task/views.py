@@ -1,6 +1,7 @@
 import os
 from datetime import date
 
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -15,12 +16,11 @@ from user.models import User, UserProfile
 
 
 def tasks(request):
-    user_login = User.find_by_username('terkin')
+    user_login = request.user
 
     usertasks_tasks = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                      statuses=[Status.ACCEPTED, Status.FAILED])
 
-    user_login = User.find_by_username('nikitin')
     paginator = Paginator(usertasks_tasks, per_page=8)
 
     page_number = request.GET.get('page')
@@ -35,9 +35,9 @@ def tasks(request):
 
 
 def tasks_inbox(request):
-    user_login = User.find_by_username('terkin')
+    user_login = request.user
     usertasks_inbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
-                                                                     statuses=[Status.INBOX, Status.FAILED])
+                                                                     statuses=[Status.INBOX])
     paginator = Paginator(usertasks_inbox, per_page=9)
 
     page_number = request.GET.get('page')
@@ -49,7 +49,7 @@ def tasks_inbox(request):
 
 
 def tasks_outbox(request):
-    user_login = User.find_by_username('nikitin')
+    user_login = request.user
     usertasks_outbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                       statuses=[Status.OUTBOX, Status.COMPLETED,
                                                                                 Status.FAILED, Status.ACCEPTED,
@@ -66,7 +66,7 @@ def tasks_outbox(request):
 
 
 def tasks_archive(request):
-    user_login = User.find_by_username('nikitin')
+    user_login = request.user
     usertasks_archive = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                        statuses=[Status.ARCHIVED])
     paginator = Paginator(usertasks_archive, per_page=9)
@@ -112,7 +112,7 @@ def reject_task(request):
         for usertask in usertasks:
             usertask.status.status = Status.REJECTED
             usertask.status.save()
-            if message and (usertask.task.message == None or usertask.task.message == ''):
+            if message and (usertask.task.message is None or usertask.task.message == ''):
                 usertask.task.message = message
                 usertask.task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -131,7 +131,7 @@ def delete_task(request, task_id):
         if file:
             file.delete()
         task.delete()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def archive_task(request, task_id):
@@ -151,8 +151,7 @@ def add_employee(request):
 
     context: dict = {'is_add': False, 'is_exist': False, 'is_not': False,
                      'message': ''}  # словарь со значениями для alerтов
-    user_login = User.find_by_username(
-        'nikitin')  # после реализации регистрации сделать получение пользователя через логин
+    user_login = request.user  # после реализации регистрации сделать получение пользователя через логин
     if user_employee:
         if user_login.exists_employees_by_username(user_employee.username):
             context['is_exist'] = True
@@ -177,7 +176,7 @@ def add_task(request):
     # print(request.POST)
     # print(request.FILES)
     if request.method == 'POST':
-        user_login = User.find_by_username('nikitin')
+        user_login = request.user
         user_employee = User.find_by_id(request.POST['executors'])
 
         task = Task(name=request.POST['name'], description=request.POST['description'], date_start=date.today(),
@@ -238,13 +237,13 @@ def validate_message(request):
     return JsonResponse(context)
 
 
-def scripts(request):
-    user = User.find_by_username(username='nikitin')
-    if not user:
-        user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
-        user_ivan.save()
-        user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
-        user_alex.save()
-    user_profile_employee = UserProfile.get_or_create(user)
-    user_profile_employee.add_employee(user)
-    return HttpResponse('ok')
+# def scripts(request):
+#     user = User.find_by_username(username='nikitin')
+#     if not user:
+#         user_ivan = User(name='ivan', surname='nikitin', username='nikitin', email='nikitin@.ru', password='<PASSWORD>')
+#         user_ivan.save()
+#         user_alex = User(name='alex', surname='terkin', username='terkin', email='terkin@.ru', password='<PASSWORD>')
+#         user_alex.save()
+#     user_profile_employee = UserProfile.get_or_create(user)
+#     user_profile_employee.add_employee(user)
+#     return HttpResponse('ok')

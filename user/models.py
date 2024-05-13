@@ -66,5 +66,9 @@ class UserProfile(models.Model):
     def find_employees_by_user(user: User) -> "UserProfile" or None:
         user_profile = UserProfile.objects.filter(user=user)
         if user_profile:
-            return user_profile
+            employees = user_profile[0].employees.all()
+            if employees:
+                return employees
+            else:
+                return None
         return None

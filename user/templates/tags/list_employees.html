@@ -1,4 +1,4 @@
 {% for emp in employees %}
-    <li class="list-group-item">{{ emp }}</li>
+    <li class="list-group-item">{{ emp.first_name }} {{ emp.last_name }}</li>
 {% empty %}
 {% endfor %}

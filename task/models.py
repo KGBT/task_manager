@@ -10,7 +10,7 @@ from user.models import User
 # Create your models here.
 
 class Task(models.Model):
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='UserTask')
+    users = models.ManyToManyField(User, through='UserTask')
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000, null=True, blank=True)
     date_start = models.DateField()
@@ -85,7 +85,7 @@ class Status(models.Model):
 
 
 class UserTask(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     status = models.OneToOneField(Status, on_delete=models.CASCADE)
 
@@ -106,7 +106,7 @@ class UserTask(models.Model):
 
     @staticmethod
     def __get_count_tasks(user_id: int, statuses: [str]) -> int:
-        return UserTask.objects.filter(status__status__in=statuses, user_id=user_id).count()
+        return UserTask.objects.filter(status__status__in=statuses, user_id=user_id).distinct('task').count()
 
     @staticmethod
     def count_tasks(user_id: int) -> int:
@@ -123,9 +123,9 @@ class UserTask(models.Model):
                                                     Status.REJECTED])
 
     @staticmethod
-    def find_usertask_by_user_id_and_statuses(user_id: int, statuses: [str]) -> 'QuerySet':
-        usertasks = (UserTask.objects.filter(user_id=user_id, status__status__in=statuses).all().distinct()
-                     .prefetch_related('task', 'task__priority', 'task__file_set').order_by('-task__date_start'))
+    def find_usertask_by_user_id_and_statuses(user_id: int, statuses: [str]) -> 'UserTask':
+        usertasks = (
+            UserTask.objects.filter(user_id=user_id, status__status__in=statuses).distinct('task').all().order_by('task','-task__date_start'))
         if Status.FAILED in statuses:
             for usertask in usertasks:
                 if usertask.task.date_end:

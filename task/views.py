@@ -2,7 +2,9 @@ import os
 from datetime import date
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -14,12 +16,18 @@ from user.models import User, UserProfile
 
 # Create your views here.
 
-
+@login_required
 def tasks(request):
     user_login = request.user
 
     usertasks_tasks = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
                                                                      statuses=[Status.ACCEPTED, Status.FAILED])
+
+    usertasks1 = (
+        UserTask.objects.all().distinct('task'))
+
+
+    print(usertasks1)
 
     paginator = Paginator(usertasks_tasks, per_page=8)
 
@@ -33,7 +41,7 @@ def tasks(request):
 
     return render(request, 'objective/tasks.html', context)
 
-
+@login_required
 def tasks_inbox(request):
     user_login = request.user
     usertasks_inbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
@@ -47,7 +55,7 @@ def tasks_inbox(request):
 
     return render(request, 'objective/inbox.html', context)
 
-
+@login_required
 def tasks_outbox(request):
     user_login = request.user
     usertasks_outbox = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
@@ -64,7 +72,7 @@ def tasks_outbox(request):
 
     return render(request, 'objective/outbox.html', context)
 
-
+@login_required
 def tasks_archive(request):
     user_login = request.user
     usertasks_archive = UserTask.find_usertask_by_user_id_and_statuses(user_id=user_login.id,
@@ -78,7 +86,7 @@ def tasks_archive(request):
 
     return render(request, 'objective/archive.html', context)
 
-
+@login_required
 def complete_task(request):
     task_id = request.POST.get('task_id')
     message = request.POST.get('message')
@@ -92,7 +100,7 @@ def complete_task(request):
                 usertask.task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
 def accept_task(request, task_id):
     usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
                                                     statuses=[Status.INBOX, Status.OUTBOX, Status.FAILED])
@@ -102,7 +110,7 @@ def accept_task(request, task_id):
             usertask.status.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
 def reject_task(request):
     task_id = request.POST.get('task_id')
     message = request.POST.get('message')
@@ -117,7 +125,7 @@ def reject_task(request):
                 usertask.task.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
 def delete_task(request, task_id):
     usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
                                                     statuses=[Status.ACCEPTED, Status.FAILED, Status.INBOX,
@@ -133,7 +141,7 @@ def delete_task(request, task_id):
         task.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
 def archive_task(request, task_id):
     usertasks = UserTask.find_usertasks_by_statuses(task_id=task_id,
                                                     statuses=[Status.OUTBOX, Status.ACCEPTED, Status.FAILED,
@@ -146,6 +154,7 @@ def archive_task(request, task_id):
 
 
 # Додeлать добавление работников обоим пользователям!
+@login_required
 def add_employee(request):
     user_employee = User.find_by_username(request.POST['username'])
 
@@ -171,7 +180,7 @@ def add_employee(request):
     # context['full_name'] = 'user_employee.username + ' ' + user_employee.surname'
     return JsonResponse(context)
 
-
+@login_required
 def add_task(request):
     # print(request.POST)
     # print(request.FILES)
@@ -203,14 +212,14 @@ def add_task(request):
 
     return JsonResponse({'ok': 'ok'})
 
-
+@login_required
 def download_file(request, file_id):
     uploaded_file = File.find_file_by_id(file_id)
     response = HttpResponse(uploaded_file.file, content_type='application/force-download')
     response['Content-Disposition'] = 'attachment; filename={0}'.format(uploaded_file.file.name)
     return response
 
-
+@login_required
 def validate_task_name(request):
     name = request.GET.get('name')
     context: dict = {'is_empty': False, 'is_max_length': False}
@@ -220,7 +229,7 @@ def validate_task_name(request):
         context['is_max_length'] = True
     return JsonResponse(context)
 
-
+@login_required
 def validate_description(request):
     description = request.GET.get('description')
     context: dict = {'is_max_length': False}
@@ -228,14 +237,13 @@ def validate_description(request):
         context['is_max_length'] = True
     return JsonResponse(context)
 
-
+@login_required
 def validate_message(request):
     message = request.GET.get('message')
     context: dict = {'is_max_length_mess': False}
     if len(message) > 1000:
         context['is_max_length_mess'] = True
     return JsonResponse(context)
-
 
 # def scripts(request):
 #     user = User.find_by_username(username='nikitin')

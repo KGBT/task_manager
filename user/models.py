@@ -44,12 +44,12 @@ class User(AbstractUser):
         return None
 
     def get_full_name(self) -> str:
-        return self.name + ' ' + self.surname
+        return self.first_name + ' ' + self.last_name
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    employees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='employees', blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    employees = models.ManyToManyField(User, related_name='employees', blank=True)
 
     def __str__(self):
         return str(f'Пользователь: {self.user}\n работник: {self.employees}')

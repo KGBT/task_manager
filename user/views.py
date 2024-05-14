@@ -1,4 +1,5 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -43,4 +44,4 @@ def sign_up(request):
 
 def log_out(request):
     logout(request)
-    return redirect('/sign_in/')
+    return redirect('/')

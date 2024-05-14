@@ -26,3 +26,4 @@
 12. Выполнить в командной строке py manage.py migrate   
 13. Запустить проект командой py manage.py runserver
 
+

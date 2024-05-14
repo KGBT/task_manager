@@ -1,0 +1,17 @@
+<a href="
+    {% if url == '#' %}
+    #
+    {% elif url == 'accept' %}
+    {% url 'accept_task' usertask.task.id %}
+    {% elif url == 'archive' %}
+    {% url 'archive_task' usertask.task.id %}
+    {% elif url == 'delete' %}
+    {% url 'delete_task' usertask.task.id %}
+    {% endif %}
+"
+   class="btn {% include 'utils/class_status.html' with class='btn-outline' %}"
+        {% if is_modal == 'true' %}
+   data-bs-toggle="modal"
+   data-bs-target="#MessageModal{{ usertask.task.id }}"
+        {% endif %}
+>{{ text_button }}</a>

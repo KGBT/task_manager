@@ -1,0 +1,121 @@
+{% load static %}
+{% load task_tags %}
+{% load user_tags %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Переключатель навигации"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/tasks">
+            <img
+                    src="{% static 'img/logo.png' %}"
+                    alt="Logo"
+                    width="30"
+                    class="d-inline-block align-text-top"
+            />
+            Task manager
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li
+                        class="nav-item d-flex justify-content-between align-items-center"
+                >
+                    <a class="nav-link active" aria-current="page" href="/tasks">Задачи</a>
+                    {% count_tasks auth_user=user %}
+                </li>
+                <li
+                        class="nav-item d-flex justify-content-between align-items-center"
+                >
+                    <a class="nav-link" href="/tasks/inbox">Входящие</a>
+                    {% count_inbox_tasks auth_user=user %}
+                </li>
+                <li
+                        class="nav-item d-flex justify-content-between align-items-center"
+                >
+                    <a class="nav-link" href="/tasks/outbox">Исходящие</a>
+                    {% count_outbox_tasks auth_user=user %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tasks/archive">Архив</a>
+                </li>
+            </ul>
+
+            <div class="btn-group ms-auto dropdown" style="margin-right: 70px">
+                <button
+                        type="button"
+                        class="btn dropdown-toggle"
+                        style="border: none"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                >
+                    Аккаунт
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <button
+                                class="dropdown-item"
+                                type="button"
+                                data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight"
+                        >
+                            Сотрудники
+                        </button>
+                    </li>
+                    {#                    <li>#}
+                    {#                        <button class="dropdown-item" type="button">Настройки</button>#}
+                    {#                    </li>#}
+                    <li>
+                        <a class="dropdown-item exit" href="/log_out" role="button">Выйти</a>
+                        {#                        <button class="dropdown-item exit" type="button">Выйти</button>#}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+
+>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            Добавить сотрудника
+        </h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Закрыть"
+        ></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <form class="d-flex pb-3" method="post" id="employeeAdd">
+            {% csrf_token %}
+            <input class="form-control me-2" placeholder="Имя пользователя" aria-label="Добавить" name="username">
+            <button class="btn btn-outline-success" type="submit">Добавить</button>
+        </form>
+
+
+        <ul class="list-group" id="list-employees">
+            <li class="list-group-item" id="item-employee">Список сотрудников</li>
+
+            {% get_employees auth_user=user %}
+
+        </ul>
+    </div>
+</div>
+

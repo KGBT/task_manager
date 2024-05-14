@@ -1,0 +1,90 @@
+<nav aria-label="Page navigation ">
+    <ul class="pagination justify-content-center">
+
+
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                   aria-disabled="true">Предыдущая</a>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link disabled" tabindex="-1" aria-disabled="true">Предыдущая</a>
+            </li>
+        {% endif %}
+
+        {% for p in page_obj.paginator.page_range %}
+
+            {% if page_obj.has_other_pages %}
+
+                {% if page_obj.number == p %}
+                    <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                        href="?page={{ p }}">{{ p }}</a>
+                    </li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                    <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                    href="?page={{ p }}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link disabled">Следующая</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+
+{##}
+{#Для получения данных из нескольких таблиц в Django можно использовать объединения (joins). Объединения позволяют связать данные из разных таблиц на основе общих полей.#}
+{##}
+{#Вот как это можно сделать:#}
+{##}
+{#Импортируйте необходимые модули:#}
+{##}
+{#import django#}
+{#from django.db import models#}
+{#Определите модели:#}
+{##}
+{#class Author(models.Model):#}
+{#name = models.CharField(max_length=50)#}
+{##}
+{#class Book(models.Model):#}
+{#title = models.CharField(max_length=100)#}
+{#author = models.ForeignKey(Author, on_delete=models.CASCADE)#}
+{#Зарегистрируйте модели в админке Django:#}
+{##}
+{#admin.site.register(Author)#}
+{#admin.site.register(Book)#}
+{#Добавьте миграции для создания таблиц в базе данных:#}
+{##}
+{#python manage.py makemigrations#}
+{#python manage.py migrate#}
+{#Создайте представление для получения данных:#}
+{##}
+{#def get_data(request):#}
+{## Получаем данные из модели#}
+{#authors = Author.objects.all()#}
+{#books = Book.objects.all()#}
+{##}
+{## Объединяем данные из двух таблиц#}
+{#data = authors.join(books)#}
+{##}
+{##}
+{## Возвращаем данные в виде JSON#}
+{#return JsonResponse({'data': data})#}
+{#Зарегистрируйте представление в urls.py:#}
+{##}
+{#urlpatterns = [#}
+{#path('get_data/', get_data, name='get_data'),#}
+{#]#}
+{##}
+{#В этом примере мы объединяем данные из таблиц Author и Book и возвращаем их в виде JSON. Вы можете настроить запрос в зависимости от ваших потребностей.#}

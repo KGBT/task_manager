@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block base %}
+
+
+    {% include 'header.html' %}
+    <div class="container pt-5 pb-5 mb-auto">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% block content %}
+
+    {% endblock content %}
+    
+       </div>
+    </div>
+
+    {% include 'pagination.html' %}
+    {% include 'footer.html' %}
+
+    
+    
+    
+{% endblock base %}
+
+
+
+
+

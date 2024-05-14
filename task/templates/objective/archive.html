@@ -1,0 +1,35 @@
+{% extends 'base_task.html' %}
+{% load static %}
+
+{% block class_status %}
+    {% include 'utils/class_status.html' with class='border' %}
+{% endblock class_status %}
+
+{% block answer %}
+
+
+    {% if usertask.task.message == '' or usertask.task.message == None %}
+
+    {% else %}
+        <hr>
+        Сообщение:
+        <p class="card-text" style="overflow: auto;
+    overflow-x: hidden;
+    max-height: 120px;">
+            {{ usertask.task.message }}
+        </p>
+    {% endif %}
+
+    {% if usertask.task.fileanswer_set.get %}
+        Присланный файл:
+        <br>
+        <a href="{% url 'download_file_answer' usertask.task.fileanswer_set.get.id %}"><img
+                src="{% static 'img/file.png' %}"
+                alt="file"
+                style="width: 30px;"
+                class="d-inline-block align-text-top"></a>
+    {% endif %}
+
+
+{% endblock answer %}
+

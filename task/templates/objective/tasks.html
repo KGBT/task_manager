@@ -1,0 +1,22 @@
+{% extends 'base_task.html' %}
+
+{% block add_task %}
+    {% include 'utils/add_task.html' %}
+{% endblock add_task %}
+
+{% block class_status %}
+    {% include 'utils/class_status.html' with class='border' %}
+{% endblock class_status %}
+
+{% block answer %}
+
+
+{% endblock answer %}
+
+{% block footer_card %}
+    {% include 'utils/button.html' with url='#' is_modal='true' text_button='Завершить' %}
+{% endblock footer_card %}
+
+{% block message %}
+    {% include 'utils/message.html' with url='complete' %}
+{% endblock message %}

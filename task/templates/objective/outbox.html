@@ -1,5 +1,5 @@
 {% extends 'base_task.html' %}
-
+{% load static %}
 {% block class_status %}
     {% include 'utils/class_status.html' with class='border' %}
 {% endblock class_status %}
@@ -18,6 +18,18 @@
         </p>
 
     {% endif %}
+
+
+    {% if usertask.task.fileanswer_set.get %}
+        Присланный файл:
+        <br>
+        <a href="{% url 'download_file_answer' usertask.task.fileanswer_set.get.id %}"><img
+                src="{% static 'img/file.png' %}"
+                alt="file"
+                style="width: 30px;"
+                class="d-inline-block align-text-top"></a>
+    {% endif %}
+
 
 {% endblock answer %}
 

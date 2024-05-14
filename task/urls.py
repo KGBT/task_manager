@@ -17,6 +17,7 @@ urlpatterns = [
     path('outbox/', views.tasks_outbox, name='tasks_outbox'),
     path('archive/', views.tasks_archive, name='tasks_archive'),
     path('download/<int:file_id>/', views.download_file, name='download_file'),
+    path('download_file_answer/<int:file_id>/', views.download_file_answer, name='download_file_answer'),
     path('complete/', views.complete_task, name='complete_task'),
     path('rejected/', views.reject_task, name='reject_task'),
     path('accept/<int:task_id>/', views.accept_task, name='accept_task'),

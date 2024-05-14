@@ -100,6 +100,7 @@ class UserTask(models.Model):
     @staticmethod
     def find_usertasks_by_statuses(task_id: int, statuses: [str]) -> 'UserTask' or None:
         usertasks = UserTask.objects.filter(task_id=task_id, status__status__in=statuses).all()
+        print(f'usertasks изметода: {usertasks}')
         if usertasks:
             return usertasks
         return None
@@ -125,7 +126,8 @@ class UserTask(models.Model):
     @staticmethod
     def find_usertask_by_user_id_and_statuses(user_id: int, statuses: [str]) -> 'UserTask':
         usertasks = (
-            UserTask.objects.filter(user_id=user_id, status__status__in=statuses).distinct('task').all().order_by('task','-task__date_start'))
+            UserTask.objects.filter(user_id=user_id, status__status__in=statuses).distinct('task').all().order_by(
+                'task', '-task__date_start'))
         if Status.FAILED in statuses:
             for usertask in usertasks:
                 if usertask.task.date_end:
@@ -168,4 +170,40 @@ class File(models.Model):
         file = File.objects.filter(task_id=task_id)
         if file:
             return file[0]
+        return None
+
+
+class FileAnswer(models.Model):
+    task = models.ForeignKey(to=Task, on_delete=models.CASCADE, null=True)
+    file_answer = models.FileField(upload_to='files_answer/', null=True, blank=True)
+
+    def delete(self, *args, **kwargs):
+        self.file_answer.delete()
+        super().delete(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.file_answer)
+
+    @staticmethod
+    def create_and_save_file(file: 'FileAnswer') -> 'FileAnswer':
+        file_answer = FileAnswer(file_answer=file)
+        file_answer.save()
+        return file_answer
+
+    def add_task(self, task: 'Task') -> None:
+        self.task_id = task.id
+        self.save()
+
+    @staticmethod
+    def find_file_by_id(file_id: int) -> 'FileAnswer' or None:
+        file = FileAnswer.objects.filter(id=file_id)
+        if file:
+            return file[0]
+        return None
+
+    @staticmethod
+    def find_file_by_id_task(task_id: int) -> 'File' or None:
+        file_answer = FileAnswer.objects.filter(task_id=task_id)
+        if file_answer:
+            return file_answer[0]
         return None

@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Добавил теги.">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c00e8c55-8074-4aab-9151-03eef5561bad.xml" afterDir="false" />
+    <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Релизная версия.">
+      <change afterPath="$PROJECT_DIR$/task/migrations/0003_fileanswer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task/migrations/0004_alter_fileanswer_file_answer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0002_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ER-diagram-all.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ER-diagram.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/archive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/objective/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/outbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/templates/utils/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/message.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +209,7 @@
       <workItem from="1715625273767" duration="386000" />
       <workItem from="1715625670350" duration="1215000" />
       <workItem from="1715626897194" duration="2233000" />
-      <workItem from="1715692425664" duration="9544000" />
+      <workItem from="1715692425664" duration="16653000" />
     </task>
     <task id="LOCAL-00001" summary="Создал проект task_manager на django.">
       <option name="closed" value="true" />
@@ -374,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715622452961</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Релизная версия.">
+      <option name="closed" value="true" />
+      <created>1715707976232</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1715707976232</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +428,8 @@
     <MESSAGE value="Немного сделал основной функционал. Что-то переработал." />
     <MESSAGE value="Подредактировал скрипты." />
     <MESSAGE value="Добавил теги." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил теги." />
+    <MESSAGE value="Релизная версия." />
+    <option name="LAST_COMMIT_MESSAGE" value="Релизная версия." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/task_manager$debug.coverage" NAME="debug Coverage Results" MODIFIED="1714397454231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ivan\PycharmProjects\task_manager" />

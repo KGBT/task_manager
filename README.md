@@ -5,13 +5,15 @@
 ## Чтобы развернуть сервер на вашем устройстве:
 
 1. Установить PostgreSQL
-2. Установить Python 3.12.2
-3. Открыть командную строку cmd
-4. Перейти в папку с проектом cd 'path\task_manager'
-5. Выполнить команду pip install -r 'requirements.txt'
-6. Перейти в настроечный файл task_manager\settings.py
-7. Найти пункт DATABASES и изменить настройки на свои
-8. <pre>DATABASES = {
+2. Зайти в pgAdmin
+3. Создать базу данных task_manager
+4. Установить Python 3.12.2
+5. Открыть командную строку cmd
+6. Перейти в папку с проектом cd 'path\task_manager'
+7. Выполнить команду pip install -r 'requirements.txt'
+8. Перейти в настроечный файл task_manager\settings.py
+9. Найти пункт DATABASES и изменить настройки на свои
+10. <pre>DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'task_manager',
@@ -20,5 +22,7 @@
         'HOST': 'HOST', #Если на своей машине: localhost
         'PORT': PORT #Порт заданный при установке. По умолчанию: 5432
     }}</pre>
-9. Запустить проект командой py manage.py runserver
+11. Выполнить в командной строке python manage.py makemigrations
+12. Выполнить в командной строке py manage.py migrate   
+13. Запустить проект командой py manage.py runserver
 

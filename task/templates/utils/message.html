@@ -1,6 +1,5 @@
-
 <!-- Modal -->
-<div class="modal fade" id="MessageModal{{ usertask.task.id  }}" tabindex="-1" aria-labelledby="ModalLabelMessage"
+<div class="modal fade" id="MessageModal{{ usertask.task.id }}" tabindex="-1" aria-labelledby="ModalLabelMessage"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,12 +8,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="addMessage{{ usertask.task.id  }}" action="
+                <form method="post" id="addMessage{{ usertask.task.id }}" action="
                 {% if url == 'complete' %}
                 {% url 'complete_task' %}
                 {% elif url == 'reject' %}
                 {% url 'reject_task' %}
-                {% endif %}">
+                {% endif %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" name="task_id" value="{{ usertask.task.id }}" hidden="hidden">
                     <div class="form-floating mb-3">
@@ -23,11 +22,17 @@
                                   id="id_message"></textarea>
                         <label for="id_message">Сообщение (необязательно)</label>
                     </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="id_file">Загрузка</label>
+                        <input type="file" name="file_answer" class="form-control" id="id_file">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                <button type="submit" class="btn btn-primary" form="addMessage{{ usertask.task.id  }}" id="btn-complete">Завершить</button>
+                <button type="submit" class="btn btn-primary" form="addMessage{{ usertask.task.id }}" id="btn-complete">
+                    Завершить
+                </button>
             </div>
         </div>
     </div>

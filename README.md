@@ -4,10 +4,10 @@
 
 ## Чтобы развернуть сервер на вашем устройстве:
 
-1. Установить PostgreSQL
+1. Установить PostgreSQL 15.7 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 2. Зайти в pgAdmin
 3. Создать базу данных task_manager
-4. Установить Python 3.12.2
+4. Установить Python 3.12.2 https://www.python.org/downloads/release/python-3122/
 5. Открыть командную строку cmd
 6. Перейти в папку с проектом cd 'path\task_manager'
 7. Выполнить команду pip install -r 'requirements.txt'

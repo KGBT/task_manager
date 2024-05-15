@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e287bf25-c51b-4fdf-ba03-c1ca87349347" name="Changes" comment="Релизная версия.">
-      <change afterPath="$PROJECT_DIR$/task/migrations/0003_fileanswer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task/migrations/0004_alter_fileanswer_file_answer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Презентация без названия (2).pptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/task_manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/task_manager.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ER-diagram-all.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ER-diagram.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/archive.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/objective/outbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/objective/outbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/templates/utils/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/task/templates/utils/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +75,7 @@
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/ivan/PycharmProjects/task_manager/user/templates/templatetags",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -104,10 +99,9 @@
       <recent name="C:\Users\ivan\PycharmProjects\task_manager\task\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Django Server.task_manager">
+  <component name="RunManager" selected="Python.debug">
     <configuration name="debug" type="PythonConfigurationType" factoryName="Python">
       <module name="task_manager" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -154,7 +148,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Django Server.task_manager" />
       <item itemvalue="Python.debug" />
     </list>
   </component>

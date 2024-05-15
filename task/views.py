@@ -26,7 +26,6 @@ def tasks(request):
     usertasks1 = (
         UserTask.objects.all().distinct('task'))
 
-    print(usertasks1)
 
     paginator = Paginator(usertasks_tasks, per_page=8)
 
@@ -204,7 +203,7 @@ def add_task(request):
         user_employee = User.find_by_id(request.POST['executors'])
 
         task = Task(name=request.POST['name'], description=request.POST['description'], date_start=date.today(),
-                    initiator='ivan nikitin')  # Заменить на авторизованного пользователя
+                    initiator=user_login.get_full_name())  # Заменить на авторизованного пользователя
 
         priority = Priority.get_or_create(request.POST['priority'])
         task.add_priority(priority)

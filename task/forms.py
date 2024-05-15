@@ -8,7 +8,7 @@ from task.models import Priority, Task, File
 class TaskForm(ModelForm):
     name = forms.CharField(label='Наименование задачи', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'text', 'placeholder': 'Наименование задачи'}))
-    date_end = forms.DateField(label='Выбор даты', required=False,
+    date_end = forms.DateField(label='Deadline', required=False,
                                widget=forms.DateInput(attrs={'type': 'date', 'class': 'datepicker form-control'}),
                                initial=date.today())
     description = forms.CharField(label='Описание (необязательно)', required=False, widget=forms.Textarea(
